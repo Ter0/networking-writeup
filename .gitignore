@@ -94,3 +94,6 @@ Temporary Items
 *.xdy
 *.tdo
 *.pdf
+
+# Keep the coversheet
+!coversheet.pdf
