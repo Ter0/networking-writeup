@@ -1,0 +1,23 @@
+$TTL 1h	; Default TTL
+@	IN	SOA	ns1.group2.	admin.group2. (
+	2015050701	; serial
+	1h		; slave refresh interval
+	15m		; slave retry interval
+	1w		; slave copy expire time
+	1h		; NXDOMAIN cache time
+	)
+
+;
+; domain name servers
+;
+@	IN	NS	ns1.group2.
+@	IN	NS	ns2.group2.
+
+
+; IPv6 PTR entries
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.6.2.1.0.b.0.2.0.2.ip6.arpa.    IN    PTR    alpha.group2.
+2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.6.2.1.0.b.0.2.0.2.ip6.arpa.    IN    PTR    bravo.group2.
+3.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.6.2.1.0.b.0.2.0.2.ip6.arpa.    IN    PTR    charlie.group2.
+2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.3.2.1.0.b.0.2.0.2.ip6.arpa.    IN    PTR    laptop-1.group2.
+2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.4.2.1.0.b.0.2.0.2.ip6.arpa.    IN    PTR    laptop-2.group2.
+2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.5.2.1.0.b.0.2.0.2.ip6.arpa.    IN    PTR    laptop-3.group2.
