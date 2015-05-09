@@ -95,5 +95,13 @@ Temporary Items
 *.tdo
 *.pdf
 
+### Vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
 # Keep the coversheet
 !coversheet.pdf
