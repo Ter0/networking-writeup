@@ -1,0 +1,23 @@
+zone "group2" {
+	type master;
+	file "/etc/bind/zones/db.group2";
+	allow-transfer {
+		trusted-ns;
+	};
+};
+
+zone "12.in-addr.arpa" {
+	type master;
+	file "/etc/bind/zones/db.12";
+	allow-transfer {
+		trusted-ns;
+	};
+};
+
+zone "2.1.0.b.0.2.0.2.ip6.arpa" {
+	type master;
+	file "/etc/bind/zones/db.2012:b012";
+	allow-transfer {
+		trusted-ns;
+	};
+};

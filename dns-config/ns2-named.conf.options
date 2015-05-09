@@ -1,0 +1,14 @@
+acl "ns-masters" {
+	12.0.1.2;
+};
+
+options {
+	directory "/var/cache/bind";
+	recursion yes;
+	allow-recursion { any; };
+	allow-query { any; };
+	allow-transfer { none; };
+	forwarders {
+		10.2.2.1;
+	};
+};

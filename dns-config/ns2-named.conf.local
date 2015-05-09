@@ -1,0 +1,23 @@
+zone "group2" {
+	type slave;
+	file "db.group2";
+	masters {
+		ns-masters;
+	};
+};
+
+zone "12.in-addr.arpa" {
+	type slave;
+	file "db.12";
+	masters {
+		ns-masters;
+	};
+};
+
+zone "2.1.0.b.0.2.0.2.ip6.arpa" {
+	type slave;
+	file "db.2012:b012";
+	masters {
+		ns-masters;
+	};
+};

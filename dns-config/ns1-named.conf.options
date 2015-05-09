@@ -1,0 +1,25 @@
+acl "trusted-ns" {
+	12.0.2.2;
+};
+
+options {
+	directory "/var/cache/bind";
+
+	recursion yes;
+
+	allow-recursion {
+		any;
+	};
+
+	allow-query {
+		any;
+	};
+
+	allow-transfer {
+		trusted-ns;
+	};
+
+	forwarders {
+		10.2.2.1;
+	};
+};

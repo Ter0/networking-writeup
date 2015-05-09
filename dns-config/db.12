@@ -1,0 +1,25 @@
+$TTL 1h ; Default TTL
+@	IN	SOA	group2. admin.group2. ( 
+	3	; serial
+	1h	; slave refresh interval
+	15m	; slave retry interval
+	15m 	; slave copy expire time
+	1h	; NXDOMAIN cache time
+	)
+
+;
+; domain name servers
+;
+@	IN	NS	ns1.group2.
+@	IN	NS	ns2.group2.
+
+;
+; IPv4 PTR entries
+;
+2.1.0	IN	PTR	laptop-1.group2.	; 12.0.1.2
+2.2.0	IN	PTR	laptop-2.group2.	; 12.0.2.2
+2.3.0	IN	PTR	laptop-3.group2.	; 12.0.3.2
+1.1.1	IN	PTR	alpha.group2.		; 12.1.1.1
+2.2.2	IN	PTR	bravo.group2.		; 12.2.2.2
+3.3.3	IN	PTR	charlie.group2.		; 12.3.3.3
+
