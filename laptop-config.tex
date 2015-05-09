@@ -1,20 +1,25 @@
 \chapter{Laptop Configuration}
 \section{DNS}
-DNS is configured for the entire \texttt{8.0.0.0/24} block and \texttt
-{2020:b012::/32} block using the \texttt{.group2} domain. The two DNS servers:
-\texttt{ns1.group2} and \texttt{ns2.group2} are arranged to provide redundancy.
-\texttt{ns1} is hosted on \texttt{laptop-1} and operates as the master
-nameserver. \texttt{ns2} is configured as a slave to the \texttt{ns1} master.
-Appendix~\ref{appendix:bind9} contains the configuration files used to
-configure the DNS software, Bind9. The three zone files found in Listings~\ref
-{listing:master-dns-db-group2},~\ref{listing:master-dns-db-12} and~\ref
-{listing:master-dns-db-2020-b012} provide forward DNS resolution for
-IPv4 and IPv6, reverse DNS resolution for IPv4 and reverse DNS resolution for
-IPv6 respectively. The six devices on the network each have a single canonical
-name, as well as potentially useful alternative names provided as CNAME records.
-For example, the laptop connected to the router \texttt{alpha.group2} has the
-canonical name of \texttt{laptop-1.group2}, as well as a CNAME record for
-\texttt{tftp.group2}.
+    DNS is configured for the entire \texttt{8.0.0.0/24} block and \texttt
+    {2020:b012::/32} block using the \texttt{.group2} domain. The two DNS servers:
+    \texttt{ns1.group2} and \texttt{ns2.group2} are arranged to provide redundancy.
+    \texttt{ns1} is hosted on \texttt{laptop-1} and operates as the master
+    nameserver. \texttt{ns2} is configured as a slave to the \texttt{ns1} master.
+    Appendix~\ref{appendix:bind9} contains the configuration files used to
+    configure the DNS software, Bind9. The three zone files found in Listings~\ref
+    {listing:master-dns-db-group2},~\ref{listing:master-dns-db-12} and~\ref
+    {listing:master-dns-db-2020-b012} provide forward DNS resolution for
+    IPv4 and IPv6, reverse DNS resolution for IPv4 and reverse DNS resolution for
+    IPv6 respectively. The six devices on the network each have a single canonical
+    name, as well as potentially useful alternative names provided as CNAME records.
+    For example, the laptop connected to the router \texttt{alpha.group2} has the
+    canonical name of \texttt{laptop-1.group2}, as well as a CNAME record for
+    \texttt{tftp.group2}.
 \section{Webserver}
+    Each of the three laptops has a webserver installed. The software used is
+    the Apache HTTP Server, available as the package \texttt{apache2} in the
+    Ubuntu repositories. Apache requires no additional configuration once
+    installed, and immediately begins serving the contents of the \texttt
+    {/var/www/} folder on port 80.
 \section{Configuration Backups}
 \section{Email}
