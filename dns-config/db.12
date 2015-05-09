@@ -1,9 +1,9 @@
 $TTL 1h ; Default TTL
 @	IN	SOA	group2. admin.group2. ( 
-	3	; serial
+	1	; serial
 	1h	; slave refresh interval
 	15m	; slave retry interval
-	15m 	; slave copy expire time
+	15m	; slave copy expire time
 	1h	; NXDOMAIN cache time
 	)
 
