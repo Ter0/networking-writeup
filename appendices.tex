@@ -1,0 +1,23 @@
+\begin{appendices}
+    \chapter{Bind9 Configuration Files}
+        \lstinputlisting[caption={Master \texttt{named.conf.options}},label=
+        {listing:master-dns-named-conf-options}]{dns-config/ns1-named.conf.options}
+
+        \lstinputlisting[caption={Master \texttt{named.conf.local}},label=
+        {listing:master-dns-named-conf-local}]{dns-config/ns1-named.conf.local}
+
+        \lstinputlisting[caption={Master \texttt{db.group2}, for forward DNS},label=
+        {listing:master-dns-db-group2}]{dns-config/db.group2}
+
+        \lstinputlisting[caption={Master \texttt{db.12}, for reverse IPv4 DNS},label=
+        {listing:master-dns-db-12}]{dns-config/db.12}
+
+        \lstinputlisting[caption={Master \texttt{db.2020:b012}, for reverse IPv6 DNS},label=
+        {listing:master-dns-db-2020-b012}]{dns-config/db.2020:b012}
+
+        \lstinputlisting[caption={Slave \texttt{named.conf.options}},label=
+        {listing:slave-dns-named-conf-options}]{dns-config/ns2-named.conf.options}
+
+        \lstinputlisting[caption={Slave \texttt{named.conf.local}},label=
+        {listing:slave-named-conf-local}]{dns-config/ns2-named.conf.options}
+\end{appendices}
