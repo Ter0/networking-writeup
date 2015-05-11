@@ -1,4 +1,4 @@
-zone "group2" {
+zone "group2.lboro" {
 	type master;
 	file "/etc/bind/zones/db.group2";
 	allow-transfer {
@@ -16,7 +16,7 @@ zone "12.in-addr.arpa" {
 
 zone "2.1.0.b.0.2.0.2.ip6.arpa" {
 	type master;
-	file "/etc/bind/zones/db.2012:b012";
+	file "/etc/bind/zones/db.2020-b012";
 	allow-transfer {
 		trusted-ns;
 	};

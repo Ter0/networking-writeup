@@ -1,38 +1,49 @@
 $TTL 1h
-@	IN	SOA	group2. admin.group2. ( 
-	1	; serial
-	1h	; slave refresh interval
-	15m	; slave retry interval
-	15m	; slave copy expire time
-	1h	; NXDOMAIN cache time
-	)
+@   IN  SOA group2.lboro. admin.group2.lboro. (
+    20  ; serial
+    1h  ; slave refresh interval
+    15m ; slave retry interval
+    15m ; slave copy expire time
+    1h  ; NXDOMAIN cache time
+    )
 
 ;
 ; domain name servers
 ;
-@	IN	NS	ns1.group2.
-@	IN	NS	ns2.group2.
+@       IN  NS  ns1
+@       IN  NS  ns2
+
+;
+; mail records
+;
+@       IN  MX  10  mail
+
+;
+; A/AAAA records for nameservers
+;
+ns1     IN  A   12.0.1.2
+        IN  AAAA    2020:b012:3000::2
+ns2     IN  A   12.0.2.2
+        IN  AAAA    2020:b012:4000::2
 
 ;
 ; A/AAAA records
 ;
-laptop-1	IN	A	12.0.1.2
-		IN	AAAA	2020:b012:3000::2
-laptop-2	IN	A	12.0.2.2
-		IN	AAAA	2020:b012:4000::2
-laptop-3	IN	A	12.0.3.2
-		IN	AAAA	2020:b012:5000::2
-alpha		IN	A	12.1.1.1
-		IN	AAAA	2020:b012:6000::1
-bravo		IN	A	12.2.2.2
-		IN	AAAA	2020:b012:6000::2
-charlie		IN	A	12.3.3.3
-		IN	AAAA	2020:b012:6000::3
+laptop-1    IN  A   12.0.1.2
+        IN  AAAA    2020:b012:3000::2
+laptop-2    IN  A   12.0.2.2
+        IN  AAAA    2020:b012:4000::2
+laptop-3    IN  A   12.0.3.2
+        IN  AAAA    2020:b012:5000::2
+alpha       IN  A   12.1.1.1
+        IN  AAAA    2020:b012:6000::1
+bravo       IN  A   12.2.2.2
+        IN  AAAA    2020:b012:6000::2
+charlie     IN  A   12.3.3.3
+        IN  AAAA    2020:b012:6000::3
 
 ;
 ; CNAME records
 ;
-ns1		IN	CNAME	laptop-1 
-ns2		IN	CNAME	laptop-2
-tftp		IN	CNAME	laptop-1
-smtp		IN	CNAME	laptop-1
+tftp        IN  CNAME   laptop-1
+mail        IN  CNAME   laptop-3
