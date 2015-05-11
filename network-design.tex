@@ -10,7 +10,7 @@ order to create a fault-tolerant network. With multiple devices used in the
 Service Provider topology the network will have increased uptime as traffic can
 be routed via an alternate path should any outage occur on a single device.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\caption{High-level Topology}
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/networkTopology.png}
@@ -37,8 +37,7 @@ used; Customer segments, Point-to-point links and Loopback addresses. The
 classification of these network types are outlined in
 Figure~\ref{figure:network-alloc-1}.
 
-
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\caption{Network Allocations}
 	\label{figure:network-alloc-1}
 	\centering
@@ -51,15 +50,14 @@ Figure~\ref{figure:network-alloc-1}.
 	\end{tabular}
 \end{figure}
 
-
 In addition to the allocation of subnets based on size, the ISP also uses the
 addresses encompassed in the block as an identifier for it's location in the
 network. Using the value of a particular octet in a network address was a schema
 that was created in advance of the network build-out and allowed for easy
 identification of issues in IP or interior routing configurations. These schemas
 are outlined in Figure~\ref{figure:network-alloc-2}.
-\FloatBarrier
-\begin{figure}[h!]
+
+\begin{figure}[!ht]
 	\caption{Network Allocations}
 	\label{figure:network-alloc-2}
 	\centering
@@ -71,6 +69,6 @@ are outlined in Figure~\ref{figure:network-alloc-2}.
 		\hline
 	\end{tabular}
 \end{figure}
-\FloatBarrier
+\clearpage
 
 \subsection{IPv6}
