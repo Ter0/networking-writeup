@@ -48,7 +48,8 @@ Figure~\ref{figure:network-alloc-1}.
         Point-to-point Links & \texttt{/30} & This is used for links that
         connect two routers, because for these links only two IP Addresses are
         required and a \texttt{/30} subnet mask is the smallest mask that will
-        provide this.\\
+        provide this. \textbf{Note:} Our transit connect to AS 42 is an
+        exception to this and uses a \texttt{/24} subnet mask.\\
 
         \hline
         Loopback Address & \texttt{/32} & Addresses used for the loopback
@@ -58,38 +59,49 @@ Figure~\ref{figure:network-alloc-1}.
         \hline
     \end{tabular}
 \end{figure}
+In addition to the classification of subnets based on size, we used several IP
+schemas to choose the IP values of our networks from our allocated block. This
+allowed for quick identification of a network from its IP without referencing
+our network diagrams. For example, customer segments connected to the Alpha
+router have a 3rd octet value of 1, so it is immediatly apparent that the IP
+\texttt{12.0.1.0/24} is connected to Alpha.
 
-In addition to the allocation of subnets based on size, the ISP also uses the
-addresses encompassed in the block as an identifier for it's location in the
-network. Using the value of a particular octet in a network address was a schema
-that was created in advance of the network build-out and allowed for easy
-identification of issues in IP or interior routing configurations. These schemas
-are outlined in Figure~\ref{figure:network-alloc-2}.
+These conventions were decided in advance of our network build-out and help us
+diagnose issues with IP or interior routing configurations in a more intuitive
+way. The exact schemas are outlined in Figure~\ref{figure:network-alloc-2}.
 
 \begin{figure}[!ht]
-    \caption{Network Allocations}
+    \caption{IP Schemas}
     \label{figure:network-alloc-2}
     \centering
-    \begin{tabular}{|c|p{8cm}|}
+    \begin{tabular}{|c|p{3cm}|p{6cm}|}
         \hline
-        \textbf{Address Allocation} & \textbf{Identifying Feature} \\
+        \textbf{Schema} & \textbf{Classification} & \textbf{Identifying Feature} \\
 
         \hline
-        \texttt{12.0.\#.0/24} & The hash in this address dictates the router that
-        this address space is connected to, with 1 corresponding to Alpha etc.
-        This would scale for up to 253 subnets in the Service Provider.\\
+        \texttt{12.0.\#.0/24} & Customer Segment & The hash dictates the ISP
+        router that this address space is connected to, 1 through 3 for Alpha,
+        Bravo and Charlie. This would scale for up to 253 subnets in the
+        Service Provider.\\
 
         \hline
-        \texttt{12.\#.0.0/30} (10+) & The hash in these networks dictate the assigned
-        number of the group we connect to on these links. This enables us to
-        quickly identify the group involved with any connectivity issues in
-        BGP.\\
+
+        \texttt{12.\#.0.0/30}, where $\#> 10$ & Peer Point-to-point Link &
+        The hash in these networks dictates the assigned number of the group we
+        connect to on these links. This enables us to quickly identify the
+        group involved with any connectivity issues in BGP. For example, the
+        link to group 3 uses the network \texttt{12.13.0.0/30}.\\
 
         \hline
-        \texttt{12.\#.\#.\#} & This schema was used for loopback addresses on the
-        routers, the hash is the same value in all three octets of the address
-        and dictates the router that this loopback is assigned to. For example,
-        \texttt{12.3.3.3/32} is the loopback address of Charlie.\\
+        \texttt{12.0.0.\#/30} & Internal Point-to-point Link &
+        The hash is a multiple of 4, starting from 0. This choice was
+        arbitary.\\
+
+        \hline
+        \texttt{12.\#.\#.\#/32} & Loopback Address & The hash is the same value
+        in all three octets of the address and dictates the router that this
+        loopback is assigned to. For example, \texttt{12.3.3.3/32} is the loopback
+        address of Charlie.\\
         \hline
     \end{tabular}
 \end{figure}
