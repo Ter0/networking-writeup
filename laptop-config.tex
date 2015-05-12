@@ -35,10 +35,10 @@
     postfix handles incoming and outgoing connections, and message
     storage is handed off to dovecot. For security, postfix only supports
     authentication over TLS. The mail server handles mail for the \texttt
-    {lboro.group2} domain, allowing a users email to take the form of
+    {group2.lboro} domain, allowing a users email to take the form of
     \texttt{username@group2.lboro}. Dovecot is configured to store users mail in
     the \texttt{/var/mail/vhosts} directory, and allow access to the mailboxes
-    using IMAPS or POP3S. Users and their encrypted passwords are specified in
+    using IMAP or POP3. Users and their encrypted passwords are specified in
     the \texttt{/etc/dovecot/dovecot-users} file, such as in Listing~\ref
     {listing:dovecot-user}.
 
