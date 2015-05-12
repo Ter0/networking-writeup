@@ -1,5 +1,20 @@
-\chapter{Router Configuration}
-\section{Static Routing}
-\section{Interior Gateway Protocols}
-\section{Exterior Gateway Protocols}
+\chapter{Router Configuration} \section{Static Routing} Static routing is a
+method of explicitly stating where a router should send its traffic for a given
+network. Due to it's Administrative Distance of 1 a static route is chosen over
+any other routing protocol, only being overruled if the router can see that the
+destination address is on a local interface (directly connected). Once the BT
+network began to adopt IS-IS as its interior gateway protocol (IGP) static
+routes were removed in favour of dynamic routing, they were also removed from
+the configurations to ensure that static routes were not erroneously chosen over
+a IS-IS sourced counterpart.
+
+In the final topology of BT, a single static route has remained in use. This
+route is used as a component of the eBGP peer link to Autonomous System No. 42,
+this peering is sourced from a Loopback interface on the remote side, because of
+this the local side requires a static route which provides initial connectivity
+to this Loopback. Without the use of these static routes the BGP sources on both
+sides would not be able to communicate and thus will never peer with one-
+another.
+
+\section{Interior Gateway Protocols} section{Exterior Gateway Protocols}
 \section{Security}
