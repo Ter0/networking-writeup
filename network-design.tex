@@ -18,19 +18,18 @@ on any single device.
 
 \section{Address Allocation}
 \subsection{IPv4}
-For this lab exercise we were assigned the IP block \texttt{12.0.0.0/8} for our ISP, BT.
-As this address space provides BT with 16.7 million addresses to allocate it was
-easy to be naive with the allocation to subnets in our internal network.
-However, taking into account the issues that arose from the original allocation
-of IPv4 network blocks to ISPs and Educational Institutions it was decided that
-wasting address space by using unnecessarily small subnet masks should be
-avoided. Within our IPv4 topology we have three classifications of addresses
-used; Customer segments, Point-to-point links and Loopback addresses. The
-classification of these network types are outlined in
+For this lab exercise we represent the ISP BT and are assigned the IP block
+\texttt{12.0.0.0/8} for our network. This address space provides us with 16.7
+million addresses to allocate, of which we require only a small fraction.
+However taking into account the issues that arose from the original allocation
+of excessive IPv4 network blocks to ISPs and Educational Institutions, we
+decided it was best to be conservative in our allocations. With this in mind we
+invented three classifications of network address, each defining the minium
+subnet size deemed necessary for its purpose. These are outlined in
 Figure~\ref{figure:network-alloc-1}.
 
 \begin{figure}[!ht]
-    \caption{Network Allocations}
+    \caption{Classifications of Network Allocations}
     \label{figure:network-alloc-1}
     \centering
     \begin{tabular}{|c|c|p{5.5cm}|}
@@ -39,21 +38,22 @@ Figure~\ref{figure:network-alloc-1}.
         \textbf{Address Type} & \textbf{Subnet Mask} & \textbf{Justification} \\
 
         \hline
-        Customer Segment & \texttt{/24} & These segments are allocated to downstream
-        customers, at current these are allocated enough address space for 254
-        devices. In our network Laptops are used on these segments to test
+        Customer Segment & \texttt{/24} & These are allocated to
+        downstream customers, who are given enough address space for 254
+        devices. In our network, laptops are used on these segments to test
         connectivity to customers. The size of this subnet also allows for easy
         identification of subnets to their location in the topology.\\
 
         \hline
-        Point-to-point Links & \texttt{/30} & This specification is used for links that
-        connect two routers, for these links only two IP Addresses are required
-        and a \texttt{/30} subnet mask is the smallest mask that will provide this.\\
+        Point-to-point Links & \texttt{/30} & This is used for links that
+        connect two routers, because for these links only two IP Addresses are
+        required and a \texttt{/30} subnet mask is the smallest mask that will
+        provide this.\\
 
         \hline
-        Loopback Address & \texttt{/32} & Addresses used for the loopback interfaces on
-        the routers, there is only a requirement for a single address and a \texttt{/32}
-        mask produces this.\\
+        Loopback Address & \texttt{/32} & Addresses used for the loopback
+        interfaces on the routers, there is only a requirement for a single
+        address and a \texttt{/32} mask produces this.\\
 
         \hline
     \end{tabular}
