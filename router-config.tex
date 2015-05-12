@@ -18,3 +18,19 @@ another.
 
 \section{Interior Gateway Protocols} section{Exterior Gateway Protocols}
 \section{Security}
+
+\section{Traffic Management}
+In order to simulate a real world situation, traffic entering and leaving our
+network needs to be managed. In order to demonstrate this, AS 42 has been setup
+to be our provider, whilist DT and Sky are setup as peers to our ISP. As AS 42
+is setup to be our provider, our prefix (12.0.0.0/8) and our peers' prefixes,
+Sky and DT (8.0.0.0/8 and 34.0.0.0/8 respectively), are advertised to it. This
+means AS 42 will be able to send traffic to our network and to our peers. As Sky
+and DT are setup to be peers to our ISP, they will be able to access our network
+but will not be able to access each other through us. In a real world situation,
+our peers should not be able to access our provider through us but we have been
+advised, and also for the sake of providing our peers redunduncy if their link
+to AS 42 is disrupted, it was decided that they will be able to access our
+provider through our network. In order to for this to work, only the 10.0.0.0/8
+and 12.0.0.0/8 prefixes are advertised to our peers. This will allow the peers
+to access our network and AS 42, but not each other.
