@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 16:48:13 UTC Mon May 11 2015
+! Last configuration change at 16:29:23 UTC Tue May 12 2015 by group2
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -122,9 +122,11 @@ router bgp 2110
  neighbor 12.2.2.2 update-source Loopback0
  neighbor 12.2.2.2 next-hop-self
  neighbor 12.13.0.2 remote-as 2792
+ neighbor 12.13.0.2 description PEER_TO_GROUP3
  neighbor 12.13.0.2 ebgp-multihop 5
  neighbor 12.13.0.2 disable-connected-check
  neighbor 12.13.0.2 update-source Loopback0
+ neighbor 12.13.0.2 route-map PEER_NOEXPORT in
 !
 ip forward-protocol nd
 !
@@ -132,6 +134,19 @@ no ip http server
 no ip http secure-server
 !
 !
+ip access-list standard MATCH_NONPEER
+ deny   34.0.0.0 0.255.255.255
+ permit any
+!
+!
+ip prefix-list OUT_PEER_ROUTES seq 5 permit 10.0.0.0/8 le 32
+ip prefix-list OUT_PEER_ROUTES seq 10 permit 12.0.0.0/8 le 32
+!
+route-map PEER_NOEXPORT permit 10
+ match ip address MATCH_NONPEER
+ set community no-export
+!
+route-map PEER_NOEXPORT permit 20
 !
 !
 !
