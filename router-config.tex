@@ -8,7 +8,12 @@ routes were removed in favour of dynamic routing, they were also removed from
 the configurations to ensure that static routes were not erroneously chosen over
 a IS-IS sourced counterpart.
 
-In the final topology of BT, a single static route has remained in use. This
+\begin{lstlisting}[caption={Alpha Static Route}, label={listing:alpha-static}]
+ip route 10.1.1.1 255.255.255.255 100.100.105.1
+\end{lstlisting}
+
+In the final topology of BT a single static route has remained in use, the
+configuration of which is shown in Listing~\ref{listing:alpha-static}. This
 route is used as a component of the eBGP peer link to Autonomous System No. 42,
 this peering is sourced from a Loopback interface on the remote side, because of
 this the local side requires a static route which provides initial connectivity
@@ -37,9 +42,13 @@ unique ID for the device in that Area. An example of the NET address for Alpha
 is shown in Listing~\ref{listing:alpha-isis}, from this we can see that Alpha is
 a member of Area 1, having an IP address of \texttt{12.1.1.1}.
 
-\begin{lstlisting}[caption={Alpha IS-IS Configuration}, label={listing:alpha-
-isis}] hostname Alpha ! router isis net 49.0001.0120.0100.1001.00 is-type
-level-1 passive-interface FastEthernet0/0/1 \end{lstlisting}
+\begin{lstlisting}[caption={Alpha IS-IS Configuration}, label={listing:alpha-isis}]
+hostname Alpha 
+!  
+router isis net 49.0001.0120.0100.1001.00  
+is-type level-1  
+passive-interface FastEthernet0/0/1  
+\end{lstlisting}
 
 In addition to the NET configuration, for IS-IS to include networks in its
 routing table the network needs to be added on an interface-by-interface basis,
