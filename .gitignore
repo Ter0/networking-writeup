@@ -27,7 +27,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -94,6 +95,14 @@ Temporary Items
 *.xdy
 *.tdo
 *.pdf
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
 
 ### Vim ###
 [._]*.s[a-w][a-z]

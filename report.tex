@@ -3,6 +3,8 @@
 \usepackage{listings}
 \usepackage{appendix}
 \usepackage{graphicx}
+\usepackage[backend=bibtex,sorting=none,style=numeric]{biblatex}
+\bibliography{bibliography}
 
 % Fix the listings appearance to be less awful.
 % The default is ridiculously ugly...
@@ -43,6 +45,7 @@
 \include{network-diagrams}
 \include{router-config}
 \include{laptop-config}
+\printbibliography
 \include{appendices}
 
 \end{document}
