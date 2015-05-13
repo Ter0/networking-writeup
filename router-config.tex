@@ -16,21 +16,59 @@ to this Loopback. Without the use of these static routes the BGP sources on both
 sides would not be able to communicate and thus will never peer with one-
 another.
 
-\section{Interior Gateway Protocols} section{Exterior Gateway Protocols}
-\section{Security}
+\section{Interior Gateway Protocols}
 
-\section{Traffic Management}
-In order to simulate a real world situation, traffic entering and leaving our
-network needs to be managed. In order to demonstrate this, AS 42 has been setup
-to be our provider, whilist DT and Sky are setup as peers to our ISP. As AS 42
-is setup to be our provider, our prefix (12.0.0.0/8) and our peers' prefixes,
-Sky and DT (8.0.0.0/8 and 34.0.0.0/8 respectively), are advertised to it. This
-means AS 42 will be able to send traffic to our network and to our peers. As Sky
-and DT are setup to be peers to our ISP, they will be able to access our network
-but will not be able to access each other through us. In a real world situation,
-our peers should not be able to access our provider through us but we have been
-advised, and also for the sake of providing our peers redunduncy if their link
-to AS 42 is disrupted, to allow them to access our provider through our network.
-In order to for this to work, only the 10.0.0.0/8 and 12.0.0.0/8 prefixes are
-advertised to our peers. This will allow the peers to access our network and AS
-42, but not each other.
+Within the three-router layout it can be seen that all networks within the
+topology has at least two paths to connect to any other network, due to this
+fact it was decided that the use of static routing would not provide the fault-
+tolerance that would be expected in an ISP network. To provide this additional
+level of redundancy we opted to use an IGP to provide automatic routing within
+the BT infrastructure. This routing is provided using Intermediate System -
+Intermediate System (IS-IS), a link state protocol which computes the shortest
+path between devices in the network using Dijkstra's Shortest Path Algorithm. We
+have opted to use dynamic routings in BT's internal infrastructure due to its
+reliability and fast convergence time when any issues arise within the network.
+
+IS-IS is implemented using the Loopback interfaces defined on each router in the
+network, from the IP Address of these Loopbacks we have defined a NET address
+which represents the device in the IS-IS routing process. The NET is an NSAP
+format which defines information about the device such as the Area ID and a
+unique ID for the device in that Area. An example of the NET address for Alpha
+is shown in Listing~\ref{listing:alpha-isis}, from this we can see that Alpha is
+a member of Area 1, having an IP address of \texttt{12.1.1.1}.
+
+\begin{lstlisting}[caption={Alpha IS-IS Configuration}, label={listing:alpha-
+isis}] hostname Alpha ! router isis net 49.0001.0120.0100.1001.00 is-type
+level-1 passive-interface FastEthernet0/0/1 \end{lstlisting}
+
+In addition to the NET configuration, for IS-IS to include networks in its
+routing table the network needs to be added on an interface-by-interface basis,
+flagging the interface to be included in the routing table. This has been
+implemented on all interfaces inside of BT on both IPv4 and IPv6. Once both the
+routing process and the interfaces for routing has been defined on all devices
+the IS-IS process runs the shortest path algorithm and selects the best routes
+within the network. When connecting BT to other Autonomous Systems for BGP it
+soon became apparent that other groups had opted for a similar NET address
+schema as ourselves, this caused additional problems as routes from another
+ISP's IS-IS process were being passed into the BT infrastructure. In order to
+stop these routes from coming into the internal routing process passive
+interfaces were configured on all external links, allowing the interface to
+remain in the IS-IS routing table but preventing route updates from being sent
+or received on that link.
+
+\section{Exterior Gateway Protocols} section{Security}
+
+\section{Traffic Management} In order to simulate a real world situation,
+traffic entering and leaving our network needs to be managed. In order to
+demonstrate this, AS 42 has been setup to be our provider, whilst DT and Sky are
+setup as peers to our ISP. As AS 42 is setup to be our provider, our prefix
+(12.0.0.0/8) and our peers' prefixes, Sky and DT (8.0.0.0/8 and 34.0.0.0/8
+respectively), are advertised to it. This means AS 42 will be able to send
+traffic to our network and to our peers. As Sky and DT are setup to be peers to
+our ISP, they will be able to access our network but will not be able to access
+each other through us. In a real world situation, our peers should not be able
+to access our provider through us but we have been advised, and also for the
+sake of providing our peers redundancy if their link to AS 42 is disrupted, to
+allow them to access our provider through our network. In order to for this to
+work, only the 10.0.0.0/8 and 12.0.0.0/8 prefixes are advertised to our peers.
+This will allow the peers to access our network and AS 42, but not each other.
