@@ -67,6 +67,27 @@ or received on that link.
 
 \section{Exterior Gateway Protocols}
 \section{Security}
+The first security measure we use is having a user account for every router and
+laptop in our setup. For ease of use all users are called "group2". This added
+the first layer of security,  meaning a password was required to access the
+devices.
+
+For routers, a second "enable" password is present, this is used to enter
+enable mode on the routers and set with the command \texttt{enable password
+\#\#\#\#\#}. The command \texttt{service password-encryption} was then used to
+encrypt the passwords so they do not appear in the router configuation files in
+plaintext. It should be noted that \texttt{service password-encryption} uses a
+weak form of encryption~\cite{ciscocracker}, mainly to avoid issues like
+should-surfing for example. The alternate option would of been to use
+\texttt{enable secret \#\#\#\#\#} instead which stores the password as an MD5
+hash, however seeing as MD5 is fairly weak anyway~\cite{md5} we didnt feel it
+would make much difference.
+
+Aditionaly telnet is also disabled over router vty lines. This was done because
+telenet sends login information in plaintext, and so is inherently insecure.
+Insead we used RSA for SSH authentication, placing an RSA public key on each
+router and the respective private keys on each laptop.
+
 
 \section{Traffic Management}
 In order to simulate a real world situation, traffic entering and leaving our
