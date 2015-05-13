@@ -1,12 +1,13 @@
-\chapter{Router Configuration} \section{Static Routing} Static routing is a
+\chapter{Router Configuration}
+\section{Static Routing} Static routing is a
 method of explicitly stating where a router should send its traffic for a given
 network. Due to it's Administrative Distance of 1 a static route is chosen over
 any other routing protocol, only being overruled if the router can see that the
 destination address is on a local interface (directly connected). Once the BT
 network began to adopt IS-IS as its interior gateway protocol (IGP) static
 routes were removed in favour of dynamic routing, they were also removed from
-the configurations to ensure that static routes were not erroneously chosen over
-a IS-IS sourced counterpart.
+the configurations to ensure that static routes were not erroneously chosen
+over a IS-IS sourced counterpart.
 
 \begin{lstlisting}[caption={Alpha Static Route}, label={listing:alpha-static}]
 ip route 10.1.1.1 255.255.255.255 100.100.105.1
@@ -15,14 +16,13 @@ ip route 10.1.1.1 255.255.255.255 100.100.105.1
 In the final topology of BT a single static route has remained in use, the
 configuration of which is shown in Listing~\ref{listing:alpha-static}. This
 route is used as a component of the eBGP peer link to Autonomous System No. 42,
-this peering is sourced from a Loopback interface on the remote side, because of
-this the local side requires a static route which provides initial connectivity
-to this Loopback. Without the use of these static routes the BGP sources on both
-sides would not be able to communicate and thus will never peer with one-
-another.
+this peering is sourced from a Loopback interface on the remote side, because
+of this the local side requires a static route which provides initial
+connectivity to this Loopback. Without the use of these static routes the BGP
+sources on both sides would not be able to communicate and thus will never peer
+with one- another.
 
 \section{Interior Gateway Protocols}
-
 Within the three-router layout it can be seen that all networks within the
 topology has at least two paths to connect to any other network, due to this
 fact it was decided that the use of static routing would not provide the fault-
@@ -65,19 +65,21 @@ interfaces were configured on all external links, allowing the interface to
 remain in the IS-IS routing table but preventing route updates from being sent
 or received on that link.
 
-\section{Exterior Gateway Protocols} section{Security}
+\section{Exterior Gateway Protocols}
+\section{Security}
 
-\section{Traffic Management} In order to simulate a real world situation,
-traffic entering and leaving our network needs to be managed. In order to
-demonstrate this, AS 42 has been setup to be our provider, whilst DT and Sky are
-setup as peers to our ISP. As AS 42 is setup to be our provider, our prefix
-(12.0.0.0/8) and our peers' prefixes, Sky and DT (8.0.0.0/8 and 34.0.0.0/8
-respectively), are advertised to it. This means AS 42 will be able to send
-traffic to our network and to our peers. As Sky and DT are setup to be peers to
-our ISP, they will be able to access our network but will not be able to access
-each other through us. In a real world situation, our peers should not be able
-to access our provider through us but we have been advised, and also for the
-sake of providing our peers redundancy if their link to AS 42 is disrupted, to
-allow them to access our provider through our network. In order to for this to
-work, only the 10.0.0.0/8 and 12.0.0.0/8 prefixes are advertised to our peers.
-This will allow the peers to access our network and AS 42, but not each other.
+\section{Traffic Management}
+In order to simulate a real world situation, traffic entering and leaving our
+network needs to be managed. In order to demonstrate this, AS 42 has been setup
+to be our provider, whilist DT and Sky are setup as peers to our ISP. As AS 42
+is setup to be our provider, our prefix (12.0.0.0/8) and our peers' prefixes,
+Sky and DT (8.0.0.0/8 and 34.0.0.0/8 respectively), are advertised to it. This
+means AS 42 will be able to send traffic to our network and to our peers. As
+Sky and DT are setup to be peers to our ISP, they will be able to access our
+network but will not be able to access each other through us. In a real world
+situation, our peers should not be able to access our provider through us but
+we have been advised, and also for the sake of providing our peers redunduncy
+if their link to AS 42 is disrupted, to allow them to access our provider
+through our network. In order to for this to work, only the 10.0.0.0/8 and
+12.0.0.0/8 prefixes are advertised to our peers. This will allow the peers to
+access our network and AS 42, but not each other.
