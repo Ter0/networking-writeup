@@ -65,7 +65,98 @@ interfaces were configured on all external links, allowing the interface to
 remain in the IS-IS routing table but preventing route updates from being sent
 or received on that link.
 
-\section{Exterior Gateway Protocols}
+\section{Exterior Gateway Protocols} In order for BGP to provide internet access
+to their customers they must have a complete internet routing table from which
+they can identify the best possible routes for their customer traffic to reach
+its destination. In addition to the knowledge of internet routing table it must
+also provide alternate paths to a destination should a route go offline or their
+links become saturated with network traffic. In order to provide both of these
+services an EGP must be used, the only EGP currently in use is the Border
+Gateway Protocol (BGP). This external routing protocol allows Autonomous Systems
+to interact with one-another through the exchange of prefixes (network
+advertisements) or through traffic management in the form of BGP policy.
+
+The implementation of BGP can be further broken down into two separate forms,
+eBGP and iBGP. The first of these handles the peering and advertisements between
+Autonomous Systems, facilitating the distribution of the BGP Prefix table and
+the configuration of routing metrics on these prefixes in order to influence
+routing decisions. In comparison, the iBGP process handles the propagation of
+the prefix table throughout internal routers.
+
+For BT's peering to other ISPs we have opted to take the approach of peering
+with the source of a Loopback interface rather than the traditional method of
+using the source interface of the connection. This decision was taken at an
+early stage of the BGP peering process with the intention of introducing
+redundant connections to peers or by implementing multi-hop peering to other
+Autonomous Systems, however these plans were not implemented due to a lack of
+time and physical interfaces on some routers. Implementation of these
+connections required additional configuration on our Peer's network as they
+would need to configure a static route on their device in order to connect to
+our Loopback and begin the peering process. A snippet of our neighbour peering
+configuration is shown in Listing~\ref{listing:sky-ebgp-conf}. It can be seen
+that in addition to updating the source of the BGP process it was also necessary
+to add a the command \texttt{disable-connected-check} which removes a test for
+BGP peers to ensure that they are directly connected. However, from our
+experiences in the lab we found that this command alone did not allow a peering
+to form, the additional command \texttt{ebgp-multihop 2} was also required in
+order for the peers to form correctly.
+
+\begin{lstlisting}[caption={BT-Sky eBGP Configuration}, label={listing:sky-ebgp-conf}]
+router bgp 2110
+!
+! Omitted
+!
+neighbor 12.11.0.2 remote-as 5607
+neighbor 12.11.0.2 description PEER_TO_GROUP1
+neighbor 12.11.0.2 ebgp-multihop 2
+neighbor 12.11.0.2 disable-connected-check
+neighbor 12.11.0.2 update-source Loopback0
+!
+\end{lstlisting}
+
+With regards to to the internal BGP, all three routers in the topology were
+configured to distribute their eBGP routes to one-another through iBGP. These
+internal peers were again formed on Loopback addresses as a countermeasure for
+link failure between the routers tearing down peer relationships. The use of a
+Loopback allows the peering to remain up after IS-IS converges, in comparison
+using the interface address would cause the peering to fail as the IP address
+would not be reachable after a link failure. A second command, \texttt{next-hop-
+	self} tells the local iBGP process to label any routes with their own address as
+the next hop, without this command the next-hop on any routes will remain as the
+next-hop for the sending router, this will cause connectivity issues. A snippet
+of the iBGP peering configuration between Bravo and Alpha is shown in
+Listing~\ref{listing:bravo-ibgp-conf}
+
+\begin{lstlisting}[caption={Bravo-Alpha iBGP Configuration}, label={listing:bravo-ibgp-conf}]
+router bgp 2110
+neighbor 12.1.1.1 remote-as 2110
+neighbor 12.1.1.1 update-source Loopback0
+neighbor 12.1.1.1 next-hop-self
+\end{lstlisting}
+
+The contents of the prefix table that is distributed by our AS is dependent on
+the configured network statements under the BGP process. This allows us to
+dictate which local BT networks we would like our peers to know about and
+therefore allow their traffic to reach. In our configurations we decided that
+the prefixes we sent should be as specific as possible and should not advertise
+unnecessary sections of our network, such as internal point-to-point links. From
+this decision we were able to narrow the advertised networks down to a list of
+six unique prefixes which were of two groups, the first being the Customer
+Segment networks which house webservers, DNS and our customers. The second
+grouping is our router subnets, which would facilitate eBGP multihop peers which
+were discussed earlier. The configuration for these network advertisements is
+shown in Listing~\ref{listing:bravo-net-conf}
+
+\begin{lstlisting}[caption={Bravo BGP Network Configuration}, label={listing:bravo-net-conf}]
+router bgp 2110
+network 12.0.1.0 mask 255.255.255.0
+network 12.0.2.0 mask 255.255.255.0
+network 12.0.3.0 mask 255.255.255.0
+network 12.1.1.1 mask 255.255.255.255
+network 12.2.2.2 mask 255.255.255.255
+network 12.3.3.3 mask 255.255.255.255
+\end{lstlisting}
+
 \section{Security}
 The first security measure we use is having a user account for every router and
 laptop in our setup. For ease of use all users are called "group2". This added
