@@ -184,37 +184,43 @@ remain in place.
 \section{Traffic Management}
 In order to simulate a real world situation, traffic entering and leaving our
 network needs to be managed. In order to demonstrate this, AS 42 has been setup
-to be our provider, whilst DT and Sky are setup as peers to our ISP. As AS 42 is
-setup to be our provider, our prefix (\texttt{12.0.0.0/8}) and our peers'
+to be our provider, whilst DT and Sky are setup as peers to our ISP.
+
+As AS 42 is
+setup to be our provider, they should be able to see routes to our network
+and to our peers' networks. In order to do this, our prefix (\texttt
+{12.0.0.0/8}) and our peers'
 prefixes, Sky and DT (\texttt{8.0.0.0/8} and \texttt{34.0.0.0/8} respectively),
-are advertised to it. This means AS 42 will be able to send traffic to our
-network and to our peers. As Sky and DT are setup to be peers to our ISP, they
-will be able to access our network but will not be able to access each other
+are advertised to it.
+
+In order to perform this filter, an access list is defined on Alpha to
+match all routes that do not belong to the prefix of \texttt{10.0.0.0/8}, i.e.
+routes not local to AS 42. A route map is then used to tag these routes with the
+well known community tag no-export. What this will do is stop the router from
+advertising routes to anything that is not on our provider's network.
+
+As Sky and DT are setup to be peers to our ISP, they
+should be able to access our network but will not be able to access each other
 through us. In a real world situation, our peers should not be able to access
 our provider through us but we have been advised, and also for the sake of
 providing our peers redundancy if their link to AS 42 is disrupted, to allow
-them to access our provider through our network. In order to for this to work,
+them to access our provider through our network. In order for this to work,
 only the \texttt{10.0.0.0/8} and \texttt{12.0.0.0/8} prefixes are advertised to
-our peers. This will allow the peers to access our network and AS 42, but not
-each other.
+our peers. This will allow the peers to see routes to our network and AS
+42, but not each other.
 
-In order to perform these filters an access list is first defined on Alpha to
-match all routes that do not belong to the prefix of \texttt{10.0.0.0/8}, i.e.
-routes not local to AS 42. A route map is then used to tag these routes with the
-well known community no-export. What this will do is stop the router from
-advertising routes to anything that is not on our provider's network.
 
-On Bravo and Charlie, similar access lists have been defined in order to only
-advertise prefixes to routes local to our peers. Bravo is connected to Sky, so
-routes not on the \texttt{8.0.0.0/8} prefix is tagged with the community
+Similar access lists to Alpha have been defined on Bravo and Charlie in order to
+only advertise prefixes to routes local to our peers. Bravo is connected to Sky,
+so routes not on the \texttt{8.0.0.0/8} prefix is tagged with the community tag
 no-export. Charlie is connected to DT, so it tags routes not on the
-\texttt{34.0.0.0/8} prefix with the community no-export. As our peers are not
-allowed to communicate with each other through us, we also had to define prefix
-lists on Bravo and Charlie. AS they are both allowed to access our network and
-our provider, prefix lists were created to permit the \texttt{10.0.0.0/8} to
-\texttt{10.0.0.0/32} prefixes and the \texttt{12.0.0.0/8} to
-\texttt{12.0.0.0/32} prefixes. This will set the routers to only advertise our
-network and our provider's network to our peers.
+\texttt{34.0.0.0/8} prefix with the community tag no-export. As our peers are
+not allowed to communicate with each other through us, we also had to define
+prefix lists on Bravo and Charlie. As they are both allowed to access our
+network and our provider, prefix lists were created to permit the
+\texttt{10.0.0.0/8} to \texttt{10.0.0.0/32} prefixes and the \texttt{12.0.0.0/8}
+to \texttt{12.0.0.0/32} prefixes. This will set the routers to only advertise
+our network and our provider's network to our peers.
 
 In summary:
 
