@@ -43,11 +43,11 @@ is shown in Listing~\ref{listing:alpha-isis}, from this we can see that Alpha is
 a member of Area 1, having an IP address of \texttt{12.1.1.1}.
 
 \begin{lstlisting}[caption={Alpha IS-IS Configuration}, label={listing:alpha-isis}]
-hostname Alpha 
-!  
-router isis net 49.0001.0120.0100.1001.00  
-is-type level-1  
-passive-interface FastEthernet0/0/1  
+hostname Alpha
+!
+router isis net 49.0001.0120.0100.1001.00
+is-type level-1
+passive-interface FastEthernet0/0/1
 \end{lstlisting}
 
 In addition to the NET configuration, for IS-IS to include networks in its
@@ -121,7 +121,7 @@ link failure between the routers tearing down peer relationships. The use of a
 Loopback allows the peering to remain up after IS-IS converges, in comparison
 using the interface address would cause the peering to fail as the IP address
 would not be reachable after a link failure. A second command, \texttt{next-hop-
-	self} tells the local iBGP process to label any routes with their own address as
+self} tells the local iBGP process to label any routes with their own address as
 the next hop, without this command the next-hop on any routes will remain as the
 next-hop for the sending router, this will cause connectivity issues. A snippet
 of the iBGP peering configuration between Bravo and Alpha is shown in
@@ -159,68 +159,73 @@ network 12.3.3.3 mask 255.255.255.255
 
 \section{Security}
 The first security measure we use is having a user account for every router and
-laptop in our setup. For ease of use all users are called "group2". This added
+laptop in our setup. For ease of use all users are called ``group''. This added
 the first layer of security,  meaning a password was required to access the
 devices.
 
-For routers, a second "enable" password is present, this is used to enter
+For routers, a second ``enable'' password is present, this is used to enter
 enable mode on the routers and set with the command \texttt{enable password
 \#\#\#\#\#}. The command \texttt{service password-encryption} was then used to
-encrypt the passwords so they do not appear in the router configuation files in
+encrypt the passwords so they do not appear in the router configuration files in
 plaintext. It should be noted that \texttt{service password-encryption} uses a
 weak form of encryption~\cite{ciscocracker}, mainly to avoid issues like
 should-surfing for example. The alternate option would of been to use
 \texttt{enable secret \#\#\#\#\#} instead which stores the password as an MD5
-hash, however seeing as MD5 is fairly weak anyway~\cite{md5} we didnt feel it
+hash, however seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
 would make much difference.
 
-Aditionaly telnet is also disabled over router vty lines. This was done because
-telenet sends login information in plaintext, and so is inherently insecure.
-Insead we used RSA for SSH authentication, placing an RSA public key on each
+Additionally telnet is also disabled over router VTY lines. This was done because
+telnet sends login information in plaintext, and so is inherently insecure.
+Instead we used RSA for SSH authentication, placing an RSA public key on each
 router and the respective private keys on each laptop.
 
 
-\section{Traffic Management} In order to simulate a real world situation,
-traffic entering and leaving our network needs to be managed. In order to
-demonstrate this, AS 42 has been setup to be our provider, whilst DT and Sky are
-setup as peers to our ISP. As AS 42 is setup to be our provider, our prefix
-(12.0.0.0/8) and our peers' prefixes, Sky and DT (8.0.0.0/8 and 34.0.0.0/8
-respectively), are advertised to it. This means AS 42 will be able to send
-traffic to our network and to our peers. As Sky and DT are setup to be peers to
-our ISP, they will be able to access our network but will not be able to access
-each other through us. In a real world situation, our peers should not be able
-to access our provider through us but we have been advised, and also for the
-sake of providing our peers redundancy if their link to AS 42 is disrupted, to
-allow them to access our provider through our network. In order to for this to
-work, only the 10.0.0.0/8 and 12.0.0.0/8 prefixes are advertised to our peers.
-This will allow the peers to access our network and AS 42, but not each other.
+\section{Traffic Management}
+In order to simulate a real world situation, traffic entering and leaving our
+network needs to be managed. In order to demonstrate this, AS 42 has been setup
+to be our provider, whilst DT and Sky are setup as peers to our ISP. As AS 42 is
+setup to be our provider, our prefix (\texttt{12.0.0.0/8}) and our peers'
+prefixes, Sky and DT (\texttt{8.0.0.0/8} and \texttt{34.0.0.0/8} respectively),
+are advertised to it. This means AS 42 will be able to send traffic to our
+network and to our peers. As Sky and DT are setup to be peers to our ISP, they
+will be able to access our network but will not be able to access each other
+through us. In a real world situation, our peers should not be able to access
+our provider through us but we have been advised, and also for the sake of
+providing our peers redundancy if their link to AS 42 is disrupted, to allow
+them to access our provider through our network. In order to for this to work,
+only the \texttt{10.0.0.0/8} and \texttt{12.0.0.0/8} prefixes are advertised to
+our peers. This will allow the peers to access our network and AS 42, but not
+each other.
 
 In order to perform these filters an access list is first defined on Alpha to
-match all routes that do not belong to the prefix of 10.0.0.0/8, i.e. routes
-not local to AS 42. A route map is then used to tag these routes with the well
-known community no-export. What this will do is stop the router from advertising
-routes to anything that is not on our provider's network.
+match all routes that do not belong to the prefix of \texttt{10.0.0.0/8}, i.e.
+routes not local to AS 42. A route map is then used to tag these routes with the
+well known community no-export. What this will do is stop the router from
+advertising routes to anything that is not on our provider's network.
 
 On Bravo and Charlie, similar access lists have been defined in order to only
 advertise prefixes to routes local to our peers. Bravo is connected to Sky, so
-routes not on the 8.0.0.0/8 prefix is tagged with the community no-export.
-Charlie is connected to DT, so it tags routes not on the 34.0.0.0/8 prefix with
-the community no-export. As our peers are not allowed to communicate with each
-other through us, we also had to define prefix lists on Bravo and Charlie. AS
-they are both allowed to access our network and our provider, prefix lists were
-created to permit the 10.0.0.0/8 to 10.0.0.0/32 prefixes and the 12.0.0.0/8 to
-12.0.0.0/32 prefixes. This will set the routers to only advertise our network
-and our provider's network to our peers.
+routes not on the \texttt{8.0.0.0/8} prefix is tagged with the community
+no-export. Charlie is connected to DT, so it tags routes not on the
+\texttt{34.0.0.0/8} prefix with the community no-export. As our peers are not
+allowed to communicate with each other through us, we also had to define prefix
+lists on Bravo and Charlie. AS they are both allowed to access our network and
+our provider, prefix lists were created to permit the \texttt{10.0.0.0/8} to
+\texttt{10.0.0.0/32} prefixes and the \texttt{12.0.0.0/8} to
+\texttt{12.0.0.0/32} prefixes. This will set the routers to only advertise our
+network and our provider's network to our peers.
 
 In summary:
 
 \begin{itemize}
-  \item Alpha advertises all prefixes to routes local to our provider
-  (10.0.0.0/8)
-  \item Bravo advertises our prefixes (12.0.0.0/8 to 12.0.0.0/32) and our
-  provider's prefixes (10.0.0.0/8 to 10.0.0.0/32) to routes local to Sky
-  (8.0.0.0/8)
-  \item Charlie advertises our prefixes (12.0.0.0/8 to 12.0.0.0/32) and our
-  provider's prefixes (10.0.0.0/8 to 10.0.0.0/32) to routes local to DT
-  (34.0.0.0/8)
+    \item Alpha advertises all prefixes to routes local to our provider
+    (\texttt{10.0.0.0/8})
+
+    \item Bravo advertises our prefixes (\texttt{12.0.0.0/8} to \texttt
+    {12.0.0.0/32}) and our  provider's prefixes (\texttt{10.0.0.0/8} to
+    \texttt{10.0.0.0/32}) to routes local to Sky (\texttt{8.0.0.0/8})
+
+    \item Charlie advertises our prefixes (\texttt{12.0.0.0/8} to \texttt
+    {12.0.0.0/32}) and our provider's prefixes (\texttt{10.0.0.0/8} to \texttt
+    {10.0.0.0/32}) to routes local to DT (\texttt{34.0.0.0/8})
 \end{itemize}
