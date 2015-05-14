@@ -1,8 +1,24 @@
 \chapter{Testing}
 \section{Network Infrastructure Testing}
-Testing of the router configurations can be implemented by viewing the routing information of the running network. For the testing of this lab network we have opted to test both the routes distributed in normal operation and the fail-over behaviour of the network should link failure occur. These tests have been implemented from both an IGP and EGP perspective.
+Testing of the router configurations was be implemented by viewing the routing
+information of the running network. For the testing of this lab network we
+opted to test both the routes distributed in normal operation and the fail-over
+behaviour of the network should link failure occur. These tests were
+implemented from both an IGP and EGP perspective.
 
-Testing of the IGP protocol IS-IS was implemented through observing the route taken by traffic between routers in both normal operation and when the link used in normal operation is removed. The behaviour in such scenario will give an indication of how resilient the interior network is to device failure. As can be seen in Listing~\ref{listing:isis-testing}. In this test, we first check connectivity to Charlie and the route taken to this location which is via GigabitEthernet0/0. At this point in the test we removed the link from Bravo to Charlie, forcing the IS-IS process to find an alternate route. As can be seen in the figure, the time taken for IS-IS convergence is enough to drop two ICMP Ping packets. However after these timeouts the topology converges and provides a route which is one hop further, allowing the final three Ping packets to reach the destination. As can be seen from the final traceroute the new route now goes via Alpha to reach Charlie.
+Testing of the IGP protocol IS-IS was implemented through observing the route
+taken by traffic between routers in both normal operation and when the link
+being used was removed. Such a scenario gave an indication as to how resilient
+the interior network was to device failure, as can be seen in
+Listing~\ref{listing:isis-testing}. In this test, we first checked connectivity
+to Charlie and the route taken to this location via GigabitEthernet0/0. We then
+removed the link from Bravo to Charlie, forcing the IS-IS process to find an
+alternate route. As can be seen in the figure, the time taken for IS-IS
+convergence was enough to drop two ICMP Ping packets. However after these
+timeouts the topology converged and provided a route which is one hop further,
+allowing the final three Ping packets to reach their destination. As can be
+seen from the final traceroute the new route now goes via Alpha to reach
+Charlie.
 
 \begin{lstlisting}[caption={Testing of IS-IS reaction to link failure}, label={listing:isis-testing}]
 Bravo#ping 12.3.3.3
@@ -43,7 +59,13 @@ VRF info: (vrf in name/id, vrf out name/id)
 2 12.0.0.9 4 msec *  0 msec
 \end{lstlisting}
 
-Testing in the EGP configuration was implemented by checking that prefixes were received from our peers were expected and correct, in addition to this we also tested that iBGP receives the external prefixes with the correct next-hop address. Listing~\ref{listing:bgp-table} shows a condensed version of the BGP Prefix Table found of Alpha. It can be seen that there are redundant routes to some networks, in particular one peer \texttt{8.0.0.0/8} can be seen via our BGP peer and via our provider, AS 42.
+Testing the EGP configuration was implemented by checking that prefixes we
+received from our peers were expected and correct, in addition to this we also
+tested that iBGP received the external prefixes with the correct next-hop
+address. Listing~\ref{listing:bgp-table} shows a condensed version of the BGP
+Prefix Table found on Alpha. It can be seen that there were redundant routes to
+some networks, in particular one peer \texttt{8.0.0.0/8} could be seen via our
+BGP peer and via our provider, AS 42.
 
 \begin{lstlisting}[caption={Extract of Alpha BGP Table}, label={listing:bgp-table}]
 Alpha#sh ip bgp
@@ -100,7 +122,11 @@ r>  10.1.1.1/32      10.1.1.1                 0             0 42 i
 *>  121.0.1.0/24     10.1.1.1                               0 42 2497 i
 \end{lstlisting}
 
-A shortened version on the Bravo BGP Prefix Table is shown in Listing~\ref{listing:bravo-bgp-table}, this contains a network \texttt{56.0.0.0/30} as an example of an external network which has an updated next-hop. Bravo will send any traffic directed to the \texttt{56.0.0.0/30} network to \texttt{10.1.1.1} which will then forward the traffic to AS 42.
+A shortened version on the Bravo BGP Prefix Table is shown in
+Listing~\ref{listing:bravo-bgp-table}, this contains a network
+\texttt{56.0.0.0/30} as an example of an external network which has an updated
+next-hop. Bravo would send any traffic directed to the \texttt{56.0.0.0/30}
+network to \texttt{10.1.1.1} which would then forward the traffic to AS 42.
 
 \begin{lstlisting}[caption={Extract of Bravo BGP Table}, label={listing:bravo-bgp-table}]
 Bravo#sh ip bgp summary
@@ -112,7 +138,16 @@ Network          Next Hop            Metric LocPrf Weight Path
 ...
 \end{lstlisting}
 
-One feature our BT's routing policy is providing a back-up link each of our Peer's providers, in both cases this is AS 42 (\texttt{10.0.0.0/8}). To provide this redundancy without allowing our network to be exploited we have employed policy to restrict the distribution of prefixes between our peers. Our configuration restricts advertisements AS 5607 and AS 2792 to only include (\texttt{12.0.0.0/8}) and (\texttt{10.0.0.0/8}) advertisements. Listing~\ref{listing:bravo-advert-table} shows the prefixes that are being advertised to AS 5607, without any policy all known BGP routes would be sent to our peers however the Listing shows that these additional routes have been retracted from advertisements.
+One feature our BT's routing policy was providing a back-up link to each of our
+Peer's providers, in both cases this was AS 42 (\texttt{10.0.0.0/8}). To
+provide this redundancy without allowing our network to be exploited we
+employed policy to restrict the distribution of prefixes between our peers. Our
+configuration restricted advertisements AS 5607 and AS 2792 to only include
+(\texttt{12.0.0.0/8}) and (\texttt{10.0.0.0/8}) advertisements.
+Listing~\ref{listing:bravo-advert-table} shows the prefixes that were being
+advertised to AS 5607. Without any policy all known BGP routes would be sent to
+our peers, however the Listing shows that these additional routes were
+retracted from advertisements.
 
 \begin{lstlisting}[caption={Prefixes advertised to AS 5607}, label={listing:bravo-advert-table}]
 Bravo#sh ip bgp neighbors 12.11.0.2 advertised-routes
@@ -131,7 +166,13 @@ Network          Next Hop            Metric LocPrf Weight Path
 Total number of prefixes 8
 \end{lstlisting}
 
-In addition to the management of prefixes sent to our peers, we have also tested that we can still connect to peers should our link go down. Listing~\ref{listing:bgp-failover} shows the best prefix information for the route \texttt{34.0.0.64} first under normal conditions, then after the peer link is taken down and finally when the link is restored. It can be seen that BGP copes with this link failure by using the link via our provider rather than the peer link for connections.
+In addition to the management of prefixes sent to our peers, we also tested
+that we can still connect to peers should our link go down.
+Listing~\ref{listing:bgp-failover} shows the best prefix information for the
+route \texttt{34.0.0.64} first under normal conditions, then after the peer
+link was taken down and finally when the link was restored. It can be seen that
+BGP coped with this link failure by using the link via our provider rather than
+the peer link for connections.
 
 \begin{lstlisting}[caption={Failover of connection to AS 2792}, label={listing:bgp-failover}]
 Bravo#sh ip bgp 34.0.0.64
@@ -169,8 +210,8 @@ Origin IGP, metric 0, localpref 100, valid, internal, best
 The only service that featured redundancy was the DNS servers. Listing~\ref
 {listing:dns-testing} shows the result of the same DNS query made before and
 then after the master DNS server was disconnected. As can be seen, the first
-query is answered by the \texttt{12.0.1.2} master server, whereas the second
-query is answered by \texttt{12.0.2.2}, the designated slave server.
+query was answered by the \texttt{12.0.1.2} master server, whereas the second
+query was answered by \texttt{12.0.2.2}, the designated slave server.
 
 \begin{lstlisting}[caption={Testing of DNS response to server disconnection}, label={listing:dns-testing}]
 group2@laptop-3:~$ nslookup alpha.group2.lboro
