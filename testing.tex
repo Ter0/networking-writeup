@@ -1,3 +1,46 @@
-\section{Testing}
-\subsection{Network Infrastructre Testing}
-\subsection{Laptop Testing}
+\chapter{Testing}
+\section{Network Infrastructure Testing}
+Testing of the router configurations can be implemented by viewing the routing information of the running network. For the testing of this lab network we have opted to test both the routes distributed in normal operation and the fail-over behaviour of the network should link failure occur. These tests have been implemented from both an IGP and EGP perspective.
+
+Testing of the IGP protocol IS-IS was implemented through observing the route taken by traffic between routers in both normal operation and when the link used in normal operation is removed. The behaviour in such scenario will give an indication of how resilient the interior network is to device failure. As can be seen in Listing~\ref{listing:isis-testing}. In this test, we first check connectivity to Charlie and the route taken to this location which is via GigabitEthernet0/0. At this point in the test we removed the link from Bravo to Charlie, forcing the IS-IS process to find an alternate route. As can be seen in the figure, the time taken for IS-IS convergence is enough to drop two ICMP Ping packets. However after these timeouts the topology converges and provides a route which is one hop further, allowing the final three Ping packets to reach the destination. As can be seen from the final traceroute the new route now goes via Alpha to reach Charlie. 
+
+\begin{lstlisting}[caption={Testing of IS-IS reaction to link failure}, label={listing:isis-testing}]
+Bravo#ping 12.3.3.3
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.3.3.3, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/4 ms
+
+Bravo#traceroute 12.3.3.3
+Type escape sequence to abort.
+Tracing the route to charlie.group2.lboro (12.3.3.3)
+VRF info: (vrf in name/id, vrf out name/id)
+1 12.0.0.6 4 msec *  0 msec
+
+Bravo#sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+...
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  up                    up
+...
+
+Bravo#sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+...
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  down                  down
+...
+
+Bravo#ping 12.3.3.3
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.3.3.3, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 1/1/1 ms
+
+Bravo#traceroute 12.3.3.3
+Type escape sequence to abort.
+Tracing the route to charlie.group2.lboro (12.3.3.3)
+VRF info: (vrf in name/id, vrf out name/id)
+1 12.0.0.1 4 msec 0 msec 0 msec
+2 12.0.0.9 4 msec *  0 msec
+\end{lstlisting}
+
+\section{Laptop Testing}
