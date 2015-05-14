@@ -1,46 +1,46 @@
 \chapter{Router Configuration}
 \section{Static Routing} Static routing is a
 method of explicitly stating where a router should send its traffic for a given
-network. Due to it's Administrative Distance of 1 a static route is chosen over
-any other routing protocol, only being overruled if the router can see that the
-destination address is on a local interface (directly connected). Once the BT
-network began to adopt IS-IS as its interior gateway protocol (IGP) static
-routes were removed in favour of dynamic routing, they were also removed from
-the configurations to ensure that static routes were not erroneously chosen
-over a IS-IS sourced counterpart.
+network. Due to it's Administrative Distance of 1, a static route is chosen
+over any other routing protocol, only being overruled if the router can see
+that the destination address is on a local interface (directly connected). Once
+the BT network began to adopt IS-IS as its interior gateway protocol (IGP)
+static routes were removed in favour of dynamic routing. They were also removed
+from the configurations to ensure that static routes were not erroneously
+chosen over a IS-IS sourced counterpart.
 
 \begin{lstlisting}[caption={Alpha Static Route}, label={listing:alpha-static}]
 ip route 10.1.1.1 255.255.255.255 100.100.105.1
 \end{lstlisting}
 
-In the final topology of BT a single static route has remained in use, the
+In the final topology of BT a single static route remained in use, the
 configuration of which is shown in Listing~\ref{listing:alpha-static}. This
-route is used as a component of the eBGP peer link to Autonomous System No. 42,
-this peering is sourced from a Loopback interface on the remote side, because
-of this the local side requires a static route which provides initial
-connectivity to this Loopback. Without the use of these static routes the BGP
-sources on both sides would not be able to communicate and thus will never peer
-with one- another.
+route was used as a component of the eBGP peer link to Autonomous System No.
+42. The peering was sourced from a Loopback interface on the remote side and
+    because of this the local side required a static route which provided
+    initial connectivity to the Loopback. Without the use of these static
+    routes the BGP sources on both sides would not have been able to
+    communicate and thus would never of peered with one-another.
 
 \section{Interior Gateway Protocols}
 Within the three-router layout it can be seen that all networks within the
-topology has at least two paths to connect to any other network, due to this
-fact it was decided that the use of static routing would not provide the fault-
+topology have at least two paths to connect to any other network. Because of
+this it was decided that the use of static routing would not provide the fault-
 tolerance that would be expected in an ISP network. To provide this additional
 level of redundancy we opted to use an IGP to provide automatic routing within
-the BT infrastructure. This routing is provided using Intermediate System -
-Intermediate System (IS-IS), a link state protocol which computes the shortest
-path between devices in the network using Dijkstra's Shortest Path Algorithm. We
-have opted to use dynamic routings in BT's internal infrastructure due to its
-reliability and fast convergence time when any issues arise within the network.
+the BT infrastructure. This was done using Intermediate System - Intermediate
+System (IS-IS), a link state protocol which computes the shortest path between
+devices in the network using Dijkstra's Shortest Path Algorithm. We opted to
+use dynamic routings in BT's internal infrastructure due to their reliability
+and fast convergence time when any issues arise within the network.
 
-IS-IS is implemented using the Loopback interfaces defined on each router in the
-network, from the IP Address of these Loopbacks we have defined a NET address
-which represents the device in the IS-IS routing process. The NET is an NSAP
-format which defines information about the device such as the Area ID and a
-unique ID for the device in that Area. An example of the NET address for Alpha
-is shown in Listing~\ref{listing:alpha-isis}, from this we can see that Alpha is
-a member of Area 1, having an IP address of \texttt{12.1.1.1}.
+IS-IS was implemented using the Loopback interfaces defined on each router in
+the network. From the IP Address of these Loopbacks we have defined a NET
+address which represents the device in the IS-IS routing process. The NET is in
+NSAP format which defines information about the device such as its Area ID and
+a unique ID to identify it within that area. An example NET address for
+Alpha is shown in Listing~\ref{listing:alpha-isis}, from this we can see that
+Alpha was a member of Area 1 and had an IP address of \texttt{12.1.1.1}.
 
 \begin{lstlisting}[caption={Alpha IS-IS Configuration}, label={listing:alpha-isis}]
 hostname Alpha
@@ -51,56 +51,56 @@ router isis
  passive-interface FastEthernet0/0/1
 \end{lstlisting}
 
-In addition to the NET configuration, for IS-IS to include networks in its
-routing table the network needs to be added on an interface-by-interface basis,
-flagging the interface to be included in the routing table. This has been
-implemented on all interfaces inside of BT on both IPv4 and IPv6. Once both the
-routing process and the interfaces for routing has been defined on all devices
-the IS-IS process runs the shortest path algorithm and selects the best routes
-within the network. When connecting BT to other Autonomous Systems for BGP it
-soon became apparent that other groups had opted for a similar NET address
-schema as ourselves, this caused additional problems as routes from another
-ISP's IS-IS process were being passed into the BT infrastructure. In order to
-stop these routes from coming into the internal routing process passive
-interfaces were configured on all external links, allowing the interface to
-remain in the IS-IS routing table but preventing route updates from being sent
-or received on that link.
+For IS-IS to include networks in its routing table the network also needs to be
+added on an interface-by-interface basis, flagging the interface to be included
+in the routing table. This was implemented on all interfaces inside of BT for
+both IPv4 and IPv6. Once both the routing process and the interfaces for
+routing has been defined on all devices the IS-IS process runs the shortest
+path algorithm and selects the best routes within the network. When connecting
+BT to other Autonomous Systems for BGP it soon became apparent that other
+groups had opted for a similar NET address schema as ourselves, this caused
+additional problems as routes from another ISP's IS-IS process were being
+passed into the BT infrastructure. In order to stop these routes from coming
+into the internal routing process passive interfaces were configured on all
+external links. This allowed the interface to remain in the IS-IS routing table
+and prevented route updates from being sent or received on that link.
 
-\section{Exterior Gateway Protocols} In order for BGP to provide internet access
-to their customers they must have a complete internet routing table from which
-they can identify the best possible routes for their customer traffic to reach
-its destination. In addition to the knowledge of internet routing table it must
-also provide alternate paths to a destination should a route go offline or their
-links become saturated with network traffic. In order to provide both of these
+\section{Exterior Gateway Protocols}
+In order for BT to provide internet access to their customers they must have a
+complete internet routing table from which they can identify the best possible
+routes for their customer's traffic to reach its destination over. In addition
+to having knowledge of an internet routing table, BT must also provide
+alternate paths to a destination should a route go offline or their links
+become saturated with network traffic. In order to provide both of these
 services an EGP must be used, the only EGP currently in use is the Border
-Gateway Protocol (BGP). This external routing protocol allows Autonomous Systems
-to interact with one-another through the exchange of prefixes (network
+Gateway Protocol (BGP). This external routing protocol allows Autonomous
+Systems to interact with one-another through the exchange of prefixes (network
 advertisements) or through traffic management in the form of BGP policy.
 
 The implementation of BGP can be further broken down into two separate forms,
-eBGP and iBGP. The first of these handles the peering and advertisements between
-Autonomous Systems, facilitating the distribution of the BGP Prefix table and
-the configuration of routing metrics on these prefixes in order to influence
-routing decisions. In comparison, the iBGP process handles the propagation of
-the prefix table throughout internal routers.
+eBGP and iBGP. The first of these handles the peering and advertisements
+between Autonomous Systems, facilitating the distribution of the BGP Prefix
+table and the configuration of routing metrics on these prefixes in order to
+influence routing decisions. In comparison, the iBGP process handles the
+propagation of the prefix table throughout internal routers.
 
-For BT's peering to other ISPs we have opted to take the approach of peering
-with the source of a Loopback interface rather than the traditional method of
-using the source interface of the connection. This decision was taken at an
-early stage of the BGP peering process with the intention of introducing
-redundant connections to peers or by implementing multi-hop peering to other
-Autonomous Systems, however these plans were not implemented due to a lack of
-time and physical interfaces on some routers. Implementation of these
-connections required additional configuration on our Peer's network as they
-would need to configure a static route on their device in order to connect to
-our Loopback and begin the peering process. A snippet of our neighbour peering
-configuration is shown in Listing~\ref{listing:sky-ebgp-conf}. It can be seen
-that in addition to updating the source of the BGP process it was also necessary
-to add a the command \texttt{disable-connected-check} which removes a test for
-BGP peers to ensure that they are directly connected. However, from our
-experiences in the lab we found that this command alone did not allow a peering
-to form, the additional command \texttt{ebgp-multihop 2} was also required in
-order for the peers to form correctly.
+For BT's peering to other ISPs we opted to take the approach of peering with
+the source of a Loopback interface rather than the traditional method of using
+the source interface of the connection. This decision was taken at an early
+stage of the BGP peering process with the intention of introducing redundant
+connections to peers or implementing multi-hop peering to other Autonomous
+Systems. However these plans were not implemented due to a lack of time and
+physical interfaces on some routers. Implementation of these connections would
+of required additional configuration on our Peer's networks as they would need
+to configure a static route on their device in order to connect to our Loopback
+and begin the peering process. A snippet of our neighbour peering configuration
+is shown in Listing~\ref{listing:sky-ebgp-conf}. It can be seen that in
+addition to updating the source of the BGP process it was also necessary to add
+the command \texttt{disable-connected-check} which removes a test for BGP peers
+to ensure that they are directly connected. However, from our experience in the
+lab we found that this command alone did not allow a peering to form. The
+additional command \texttt{ebgp-multihop 2} was also required in order for the
+peers to form correctly.
 
 \begin{lstlisting}[caption={BT-Sky eBGP Configuration}, label={listing:sky-ebgp-conf}]
 router bgp 2110
@@ -115,18 +115,18 @@ router bgp 2110
 !
 \end{lstlisting}
 
-With regards to to the internal BGP, all three routers in the topology were
-configured to distribute their eBGP routes to one-another through iBGP. These
-internal peers were again formed on Loopback addresses as a countermeasure for
-link failure between the routers tearing down peer relationships. The use of a
-Loopback allows the peering to remain up after IS-IS converges, in comparison
-using the interface address would cause the peering to fail as the IP address
-would not be reachable after a link failure. A second command, \texttt{next-hop-
-self} tells the local iBGP process to label any routes with their own address as
-the next hop, without this command the next-hop on any routes will remain as the
-next-hop for the sending router, this will cause connectivity issues. A snippet
-of the iBGP peering configuration between Bravo and Alpha is shown in
-Listing~\ref{listing:bravo-ibgp-conf}
+All three routers in the topology were configured to distribute their eBGP
+routes to one-another through iBGP. These internal peers were again formed on
+Loopback addresses as a countermeasure for link failure between the routers
+tearing down peer relationships. The use of a Loopback allows the peering to
+remain up after IS-IS converges, in comparison using the interface address
+would cause the peering to fail as the IP address would not be reachable after
+a link failure. The command \texttt{next-hop-self} was used to tell the local iBGP
+process to label any routes with their own address as the next hop. Without
+this command the next-hop on any routes would remain as the next-hop for the
+sending router and this will cause connectivity issues. A snippet of the iBGP
+peering configuration between Bravo and Alpha is shown in Listing~\ref{listing
+:bravo-ibgp-conf}
 
 \begin{lstlisting}[caption={Bravo-Alpha iBGP Configuration}, label={listing:bravo-ibgp-conf}]
 router bgp 2110
@@ -135,18 +135,18 @@ router bgp 2110
  neighbor 12.1.1.1 next-hop-self
 \end{lstlisting}
 
-The contents of the prefix table that is distributed by our AS is dependent on
-the configured network statements under the BGP process. This allows us to
+The contents of the prefix table that was distributed by our AS was dependent
+on the configured network statements under the BGP process. This allowed us to
 dictate which local BT networks we would like our peers to know about and
 therefore allow their traffic to reach. In our configurations we decided that
 the prefixes we sent should be as specific as possible and should not advertise
-unnecessary sections of our network, such as internal point-to-point links. From
-this decision we were able to narrow the advertised networks down to a list of
-six unique prefixes which were of two groups, the first being the Customer
-Segment networks which house webservers, DNS and our customers. The second
-grouping is our router subnets, which would facilitate eBGP multihop peers which
-were discussed earlier. The configuration for these network advertisements is
-shown in Listing~\ref{listing:bravo-net-conf}
+unnecessary sections of our network, such as internal point-to-point links.
+From this decision we were able to narrow the advertised networks down to a
+list of six unique prefixes which were in two groups, the first being the
+Customer Segment networks which housed webservers, DNS and our customers. The
+second grouping was our router subnets, which would facilitate eBGP multihop
+peers as discussed earlier. The configuration for these network advertisements
+is shown in Listing~\ref{listing:bravo-net-conf}
 
 \begin{lstlisting}[caption={Bravo BGP Network Configuration}, label={listing:bravo-net-conf}]
 router bgp 2110
