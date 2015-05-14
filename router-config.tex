@@ -160,17 +160,17 @@ router bgp 2110
 
 \section{Security}
 The first security measure we used was having a user account for every router
-and laptop in our setup. For ease of use all users were called ``group''. This
+and laptop in our setup. For ease of use all users were called ``group2''. This
 added the first layer of security, meaning a password was required to access
 the devices.
 
 For routers, a second ``enable'' password was enforced. This was used to
 prevent users entering enable mode on the routers and set with the command
-\texttt{enable password \#\#\#\#\#}. The command \texttt{service password-
-encryption} was then used to encrypt the passwords so they did not appear in
+\texttt{enable password \#\#\#\#\#}. The command \texttt{service password-encryption}
+was then used to encrypt the passwords so they did not appear in
 the router configuration files as plaintext. It should be noted that
 \texttt{service password-encryption} uses a weak form of
-encryption~\cite{ciscocracker}, and so is best used as a deterent for issues
+encryption~\cite{ciscocracker}, and so is best used as a deterrent for issues
 like shoulder-surfing. The alternate option would of been to use
 \texttt{enable secret \#\#\#\#\#} instead which stores the password as an MD5
 hash. However seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
