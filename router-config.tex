@@ -166,18 +166,18 @@ devices.
 For routers, a second ``enable'' password is present, this is used to enter
 enable mode on the routers and set with the command \texttt{enable password
 \#\#\#\#\#}. The command \texttt{service password-encryption} was then used to
-encrypt the passwords so they do not appear in the router configuration files in
-plaintext. It should be noted that \texttt{service password-encryption} uses a
-weak form of encryption~\cite{ciscocracker}, mainly to avoid issues like
+encrypt the passwords so they do not appear in the router configuration files
+in plaintext. It should be noted that \texttt{service password-encryption} uses
+a weak form of encryption~\cite{ciscocracker}, mainly to avoid issues like
 should-surfing for example. The alternate option would of been to use
 \texttt{enable secret \#\#\#\#\#} instead which stores the password as an MD5
 hash, however seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
 would make much difference.
 
-Additionally telnet is also disabled over router VTY lines. This was done because
-telnet sends login information in plaintext, and so is inherently insecure.
-Instead we used RSA for SSH authentication, placing an RSA public key on each
-router and the respective private keys on each laptop.
+Additionally telnet is also disabled over router VTY lines. This was done
+because telnet sends login information in plaintext, and so is inherently
+insecure. Instead we used RSA for SSH authentication, placing an RSA public key
+on each router and the respective private keys on each laptop.
 
 
 \section{Traffic Management}
