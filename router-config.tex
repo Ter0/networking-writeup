@@ -121,12 +121,12 @@ Loopback addresses as a countermeasure for link failure between the routers
 tearing down peer relationships. The use of a Loopback allows the peering to
 remain up after IS-IS converges, in comparison using the interface address
 would cause the peering to fail as the IP address would not be reachable after
-a link failure. The command \texttt{next-hop-self} was used to tell the local iBGP
-process to label any routes with their own address as the next hop. Without
-this command the next-hop on any routes would remain as the next-hop for the
-sending router and this will cause connectivity issues. A snippet of the iBGP
-peering configuration between Bravo and Alpha is shown in Listing~\ref{listing
-:bravo-ibgp-conf}
+a link failure. The command \texttt{next-hop-self} was used to tell the local
+iBGP process to label any routes with their own address as the next hop.
+Without this command the next-hop on any routes would remain as the next-hop
+for the sending router and this will cause connectivity issues. A snippet of
+the iBGP peering configuration between Bravo and Alpha is shown in
+Listing~\ref{listing:bravo-ibgp-conf}
 
 \begin{lstlisting}[caption={Bravo-Alpha iBGP Configuration}, label={listing:bravo-ibgp-conf}]
 router bgp 2110
@@ -146,7 +146,7 @@ list of six unique prefixes which were in two groups, the first being the
 Customer Segment networks which housed webservers, DNS and our customers. The
 second grouping was our router subnets, which would facilitate eBGP multihop
 peers as discussed earlier. The configuration for these network advertisements
-is shown in Listing~\ref{listing:bravo-net-conf}
+is shown in Listing~\ref{listing:bravo-net-conf}.
 
 \begin{lstlisting}[caption={Bravo BGP Network Configuration}, label={listing:bravo-net-conf}]
 router bgp 2110
