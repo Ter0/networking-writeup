@@ -100,7 +100,7 @@ r>  10.1.1.1/32      10.1.1.1                 0             0 42 i
 *>  121.0.1.0/24     10.1.1.1                               0 42 2497 i
 \end{lstlisting}
 
-A shortened version on the Bravo BGP Prefix Table is shown in Listing~\ref{listing:bravo-bgp-table}, this contains a network \texttt{56.0.0.0/30} as an example of an external network which has an updated next-hop. Bravo will send any traffic directed to the \texttt{56.0.0.0/30} network to \texttt{10.1.1.1} which will then forward the traffic to AS42.
+A shortened version on the Bravo BGP Prefix Table is shown in Listing~\ref{listing:bravo-bgp-table}, this contains a network \texttt{56.0.0.0/30} as an example of an external network which has an updated next-hop. Bravo will send any traffic directed to the \texttt{56.0.0.0/30} network to \texttt{10.1.1.1} which will then forward the traffic to AS 42.
 
 \begin{lstlisting}[caption={Extract of Bravo BGP Table}, label={listing:bravo-bgp-table}]
 Bravo#sh ip bgp summary
