@@ -124,38 +124,39 @@ link or a Loopback. This is detailed in Figure~\ref{figure:network-alloc-3}.
         \hline \textbf{Address Type} & \textbf{Subnet Mask} & \textbf{Justification} \\
 
         \hline
-        Customer Segment & \texttt{/36} & This address space is allocated for
-        downstream connections to the ISPs customers, this currently has a large subnet
-        mask which allows for it to be broken down into subnets containing the 48-bit
-        Global Routing Prefix for customer networks.\\
+        Customer Segment & \texttt{/36} & This address space was allocated for
+        downstream connections to the ISPs customers. It had a large subnet
+        mask to allow for it to be broken down into subnets containing the
+        48-bit Global Routing Prefix for customer networks.\\
 
         \hline
-        Point-to-point Links & \texttt{/64} & These addresses
-        are used for links that directly connect two routers, requiring two unique IP
-        addresses. Reasons for the size of the subnet mask used are discussed below.\\
+        Point-to-point Links & \texttt{/64} & These addresses were used for
+        links that directly connected two routers, requiring two unique IP
+        addresses. Reasons for the size of the subnet mask used are discussed
+        below.\\
 
         \hline
         Loopback Address & \texttt{/128} & Addresses used for the loopback
-        interfaces on the routers, there is only a requirement for a single address as
-        was the case with IPv4. In IPv6 a \texttt{/128} mask produces this.\\
+        interfaces on the routers, there was only a requirement for a single
+        address as was the case with IPv4. In IPv6 a \texttt{/128} mask
+        produces this.\\
 
         \hline
     \end{tabular}
 \end{figure}
 
-The allocation of Customer Segments use a \texttt{/36} mask as a method of
-breaking down our customer networks into a more manageable block of addresses.
-The \texttt{/36} mask allows for BT to further break down their Customer
-Segments into IPv6 blocks with a 48-bit Global Routing Prefix, which is a
-unique ID for an IPv6 address which can be used identify both the ISP and the
-customer.
+Customer Segments used a \texttt{/36} mask as a method of breaking down our
+customer networks into a more manageable block of addresses. The \texttt{/36}
+mask allowed for us to further break down our Customer Segments into IPv6
+blocks with a 48-bit Global Routing Prefix, which is a unique ID for an IPv6
+address which can be used identify both the ISP and the customer.
 
 In Figure~\ref{figure:network-alloc-3} it is obvious that applying a
 \texttt{/64} mask allocates a considerable amount of addresses to a network
 which would otherwise only require two unique addresses. The decision to use
 this address was taken from RFC 4291, which dictates that ``For all unicast
 addresses, except those that start with the binary value 000, Interface IDs are
-required to be 64 bits long''~\cite{rfc4291}. In recent years there has been
+required to be 64 bits long''~\cite{rfc4291}. In recent years there have been
 discussions that the allocation of such a large amount of addresses is wasteful
-and endorse the use of a \texttt{/127} mask. However this is not a standard and
-for the purposes of this lab we have adhered to the RFC.
+and that the use of a \texttt{/127} mask should be endorsed. However this is
+not a standard and for the purposes of this lab we have adhered to the RFC instead.
