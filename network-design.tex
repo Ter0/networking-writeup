@@ -2,7 +2,7 @@
 
 \section{Topology}
 
-The topology used for this lab assignment takes the form of a three router set-
+The topology used for this lab assignment took the form of a three router set-
 up, simulating the infrastructure a typical Internet Service Provider (ISP)
 might have. Using three routers as opposed to a one allows the ISP to make use
 of additional technologies such as dynamic internal routing and iBGP in order
@@ -20,7 +20,7 @@ on any single device.
 \subsection{IPv4}
 For this lab exercise we represented the ISP BT and were assigned the IP block
 \texttt{12.0.0.0/8} for our network. This address space provided us with 16.7
-million addresses which could be allocated, with only a small fraction actualy
+million addresses which could be allocated, with only a small fraction actually
 being required for our internal infrastructure. When allocating our address
 block we took into account the issues that arose from the original allocation
 of excessively large IPv4 network blocks to ISPs and Educational Institutions
@@ -56,7 +56,7 @@ Figure~\ref{figure:network-alloc-1}.
         \hline
         Loopback Address & \texttt{/32} & These were addresses used for the
         loopback interfaces on the routers. There was only a requirement for a
-        single address and a \texttt{/32} mask produces this.\\
+        single address and a \texttt{/32} mask produced this.\\
 
         \hline
     \end{tabular}
@@ -65,7 +65,7 @@ In addition to the classification of subnets based on size, we used several IP
 schemas to choose the IP values of our networks from our allocated block. This
 allowed for quick identification of a network from its IP without referencing
 our network diagrams. For example, customer segments connected to the Alpha
-router had a 3rd octet value of 1, so it was immediately apparent that the IP
+router had a third octet value of 1, so it was immediately apparent that the IP
 \texttt{12.0.1.0/24} was connected to Alpha.
 
 These conventions were decided in advance of our network build-out and helped
@@ -84,7 +84,7 @@ intuitive way. The exact schemas are outlined in Figure~\ref{figure:network-allo
         \hline
         \texttt{12.0.\#.0/24} & Customer Segment & The hash dictates the ISP
         router that this address space would be connected to, 1 through 3 for
-        Alpha, Bravo and Charlie. This could be scaled up to 253 additonal
+        Alpha, Bravo and Charlie. This could be scaled up to 253 additional
         subnets in the Service Provider.\\
         \hline
         \texttt{12.\#.0.0/30}, where $\#> 10$ & Peer Point-to-point Link &
@@ -95,7 +95,7 @@ intuitive way. The exact schemas are outlined in Figure~\ref{figure:network-allo
         \hline
         \texttt{12.0.0.\#/30} & Internal Point-to-point Link &
         The hash is a multiple of 4, starting from 0. This choice was
-        arbitary.\\
+        arbitrary.\\
         \hline
         \texttt{12.\#.\#.\#/32} & Loopback Address & The hash is
         the same value in all three octets of the address and dictates the
@@ -111,7 +111,7 @@ intuitive way. The exact schemas are outlined in Figure~\ref{figure:network-allo
 \subsection{IPv6}
 When allocating the IPv6 address-space we took a similar approach to that of
 IPv4, aiming to allocate an appropriate sized address block to each segment of
-the network. As such the classifications used are approximatly the same as
+the network. As such the classifications used are approximately the same as
 IPv4, with network segments being either a Customer Segment, Point-to-point
 link or a Loopback. This is detailed in Figure~\ref{figure:network-alloc-3}.
 
