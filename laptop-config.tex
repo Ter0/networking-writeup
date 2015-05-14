@@ -27,7 +27,10 @@
     {tftp.group2.lboro}. The TFTP installation was made using the \texttt
     {tftpd-hpa} package available in the repositories. Provided the service is
     started, a functioning TFTP server is then available to write to \texttt
-    {/var/lib/tftpboot}.
+    {/var/lib/tftpboot}. For security reasons, permissions on the TFTP server
+    restricted to only allow files to be written if they have been explicitly
+    created by the administrator on the machine, suh as by \texttt{touch
+    alpha-confg}.
 \section{Email}
     An email server is hosted on \texttt{laptop-3.group2.lboro}, commonly
     accessed using the \texttt{mail.group2.lboro} alias. The server is setup
