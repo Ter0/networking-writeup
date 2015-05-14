@@ -18,15 +18,15 @@ on any single device.
 
 \section{Address Allocation}
 \subsection{IPv4}
-For this lab exercise we represent the ISP BT and are assigned the IP block
-\texttt{12.0.0.0/8} for our network. This address space provides us with 16.7
-million addresses which can be allocated, of which we require only a small
-fraction for our internal infrastructure. When allocating our address block we
-took into account the issues that arose from the original allocation of
-excessively large IPv4 network blocks to ISPs and Educational Institutions, we
-decided it was best to be conservative in our allocations. With this in mind we
-invented three classifications of network address, each defining the minimum
-subnet size deemed necessary for its purpose. These are outlined in
+For this lab exercise we represented the ISP BT and were assigned the IP block
+\texttt{12.0.0.0/8} for our network. This address space provided us with 16.7
+million addresses which could be allocated, with only a small fraction actualy
+being required for our internal infrastructure. When allocating our address
+block we took into account the issues that arose from the original allocation
+of excessively large IPv4 network blocks to ISPs and Educational Institutions
+and decided it was best to be conservative in our allocations. With this in
+mind we invented three classifications of network address, each defining the
+minimum subnet size deemed necessary for its purpose. These are outlined in
 Figure~\ref{figure:network-alloc-1}.
 
 \begin{figure}[!ht]
@@ -39,23 +39,24 @@ Figure~\ref{figure:network-alloc-1}.
         \textbf{Address Type} & \textbf{Subnet Mask} & \textbf{Justification} \\
 
         \hline
-        Customer Segment & \texttt{/24} & These are allocated to downstream
-        customers, who are given enough address space for 254 devices. In our network,
-        laptops are used on these segments to test connectivity to customers. The size
-        of this subnet also allows for easy identification of subnets to their location
-        in the topology.\\
+        Customer Segment & \texttt{/24} & These were allocated to downstream
+        customers, who were given enough address space for 254 devices. In our
+        network, laptops were used on these segments to test connectivity to
+        customers. The size of this subnet also allowed for easy identification
+        of subnets to their location in the topology.\\
 
         \hline
-        Point-to-point Links & \texttt{/30} & This is used for links that
-        connect two routers, because for these links only two IP Addresses are required
-        and a \texttt{/30} subnet mask is the smallest mask that will provide this.
-        \textbf{Note:} The connection to our provider, AS 42, is an exception to this
-        and uses a \texttt{/24} subnet mask as was provided by AS 42.\\
+        Point-to-point Links & \texttt{/30} & This was used for links that
+        connected two routers, because for those links only two IP Addresses
+        were required and a \texttt{/30} subnet mask is the smallest mask that
+        can provide this.
+        \textbf{Note:} The connection to our provider, AS 42, was an exception
+        to this and used a \texttt{/24} subnet mask as was provided by AS 42.\\
 
         \hline
-        Loopback Address & \texttt{/32} & Addresses used for the loopback
-        interfaces on the routers, there is only a requirement for a single address and
-        a \texttt{/32} mask produces this.\\
+        Loopback Address & \texttt{/32} & These were addresses used for the
+        loopback interfaces on the routers. There was only a requirement for a
+        single address and a \texttt{/32} mask produces this.\\
 
         \hline
     \end{tabular}
@@ -64,12 +65,13 @@ In addition to the classification of subnets based on size, we used several IP
 schemas to choose the IP values of our networks from our allocated block. This
 allowed for quick identification of a network from its IP without referencing
 our network diagrams. For example, customer segments connected to the Alpha
-router have a 3rd octet value of 1, so it is immediately apparent that the IP
-\texttt{12.0.1.0/24} is connected to Alpha.
+router had a 3rd octet value of 1, so it was immediately apparent that the IP
+\texttt{12.0.1.0/24} was connected to Alpha.
 
-These conventions were decided in advance of our network build-out and help us
-diagnose issues with IP or interior routing configurations in a more intuitive
-way. The exact schemas are outlined in Figure~\ref{figure:network-alloc-2}.
+These conventions were decided in advance of our network build-out and helped
+us diagnose issues with IP or interior routing configurations in a more
+intuitive way. The exact schemas are outlined in Figure~\ref{figure:network-
+alloc-2}.
 
 \begin{figure}[!ht]
     \caption{IP Schemas}
@@ -82,25 +84,24 @@ way. The exact schemas are outlined in Figure~\ref{figure:network-alloc-2}.
 
         \hline
         \texttt{12.0.\#.0/24} & Customer Segment & The hash dictates the ISP
-        router that this address space is connected to, 1 through 3 for Alpha, Bravo
-        and Charlie. This would scale for up to 253 subnets in the Service Provider.\\
-%why 253
+        router that this address space would be connected to, 1 through 3 for
+        Alpha, Bravo and Charlie. This could be scaled up to 253 additonal
+        subnets in the Service Provider.\\
         \hline
         \texttt{12.\#.0.0/30}, where $\#> 10$ & Peer Point-to-point Link &
-        The hash in these networks dictates the assigned number of the group we connect
-        to on these links. This enables us to quickly identify the group involved with
-        any connectivity issues in BGP. For example, the link to group 3 uses the
-        network \texttt{12.13.0.0/30}.\\
-
+        The hash in these networks dictates the assigned number of the group we
+        connect to on these links. This enabled us to quickly identify the
+        group involved with any connectivity issues using BGP. For example, the
+        link to group 3 used the network \texttt{12.13.0.0/30}.\\
         \hline
         \texttt{12.0.0.\#/30} & Internal Point-to-point Link &
-        The hash is a multiple of 4, starting from 0. This choice was arbitary.\\
-
+        The hash is a multiple of 4, starting from 0. This choice was
+        arbitary.\\
         \hline
         \texttt{12.\#.\#.\#/32} & Loopback Address & The hash is
-        the same value in all three octets of the address and dictates the router that
-        this loopback is assigned to. For example, \texttt{12.3.3.3/32} is the loopback
-        address of Charlie.\\
+        the same value in all three octets of the address and dictates the
+        router that this loopback was assigned to. For example,
+        \texttt{12.3.3.3/32} was the loopback address of Charlie.\\
 
         \hline
     \end{tabular}
