@@ -1,57 +1,57 @@
 \chapter{Laptop Configuration}
 \section{DNS}
-    DNS is configured for the entire \texttt{12.0.0.0/24} block and \texttt
-    {2020:b012::/32} block using the \texttt{.group2.lboro} domain. The two DNS servers:
-    \texttt{ns1.group2.lboro} and \texttt{ns2.group2.lboro} are arranged to provide redundancy.
-    \texttt{ns1} is hosted on \texttt{laptop-1} and operates as the master
-    nameserver. \texttt{ns2} is configured as a slave to the \texttt{ns1} master.
-    Appendix~\ref{appendix:bind9} contains the configuration files used to
-    configure the DNS software, Bind9. The three zone files found in Listings~\ref
-    {listing:master-dns-db-group2},~\ref{listing:master-dns-db-12} and~\ref
-    {listing:master-dns-db-2020-b012} provide forward DNS resolution for
-    IPv4 and IPv6, reverse DNS resolution for IPv4 and reverse DNS resolution for
-    IPv6 respectively. The six devices on the network each have a single canonical
-    name, as well as potentially useful alternative names provided as CNAME records.
-    For example, the laptop connected to the router \texttt{alpha.group2.lboro} has the
-    canonical name of \texttt{laptop-1.group2.lboro}, as well as a CNAME record for
+    DNS was configured for the entire \texttt{12.0.0.0/24} block and \texttt
+    {2020:b012::/32} block using the \texttt{.group2.lboro} domain. The two DNS
+    servers: \texttt{ns1.group2.lboro} and \texttt{ns2.group2.lboro} were
+    arranged to provide redundancy.
+    \texttt{ns1} was hosted on \texttt{laptop-1} and operated as the master
+    nameserver. \texttt{ns2} was configured as a slave to the \texttt{ns1}
+    master. Appendix~\ref{appendix:bind9} contains the configuration files used
+    to configure the DNS software, Bind9. The three zone files found in
+    Listings~\ref {listing:master-dns-db-group2},~\ref{listing:master-dns-db-12} and~\ref {listing:master-dns-db-2020-b012} provided forward DNS
+    resolution for IPv4 and IPv6, reverse DNS resolution for IPv4 and reverse
+    DNS resolution for IPv6 respectively. The six devices on the network each
+    had a single canonical name, as well as potentially useful alternative
+    names provided as CNAME records. For example, the laptop connected to the
+    router \texttt{alpha.group2.lboro} had the canonical name of
+    \texttt{laptop-1.group2.lboro}, as well as a CNAME record for
     \texttt{tftp.group2.lboro}.
 \section{Webserver}
-    Each of the three laptops has a webserver installed. The software used is
+    Each of the three laptops had a webserver installed. The software used was
     the Apache HTTP Server, available as the package \texttt{apache2} in the
     Ubuntu repositories. Apache requires no additional configuration once
     installed, and immediately begins serving the contents of the \texttt
     {/var/www/} folder on port 80.
 \section{Configuration Backups}
-    Configuration backups are performed using TFTP to the host \texttt
-    {laptop-1.group2.lboro}, accessible using the alias \texttt
+    Configuration backups were performed using TFTP to the host \texttt
+    {laptop-1.group2.lboro}, accessed using the alias \texttt
     {tftp.group2.lboro}. The TFTP installation was made using the \texttt
-    {tftpd-hpa} package available in the repositories. Provided the service is
-    started, a functioning TFTP server is then available to write to \texttt
+    {tftpd-hpa} package available in the repositories. Provided the service was
+    started, a functioning TFTP server was then available to write to \texttt
     {/var/lib/tftpboot}. For security reasons, permissions on the TFTP server
-    restricted to only allow files to be written if they have been explicitly
-    created by the administrator on the machine, suh as by \texttt{touch
-    alpha-confg}.
+    were restricted to only allow files to be written if they had been
+    explicitly created by the administrator on the machine, such as by
+    \texttt{touch alpha-confg}.
 \section{Email}
-    An email server is hosted on \texttt{laptop-3.group2.lboro}, commonly
-    accessed using the \texttt{mail.group2.lboro} alias. The server is setup
-    using postfix for SMTP, and dovecot for LMTP. That is,
-    postfix handles incoming and outgoing connections, and message
-    storage is handed off to dovecot. For security, postfix only supports
-    authentication over TLS. The mail server handles mail for the \texttt
-    {group2.lboro} domain, allowing a users email to take the form of
-    \texttt{username@group2.lboro}. Dovecot is configured to store users mail in
-    the \texttt{/var/mail/vhosts} directory, and allow access to the mailboxes
-    using IMAP or POP3. Users and their encrypted passwords are specified in
-    the \texttt{/etc/dovecot/dovecot-users} file, such as in Listing~\ref
-    {listing:dovecot-user}.
+    An email server was hosted on \texttt{laptop-3.group2.lboro}, commonly
+    accessed using the \texttt{mail.group2.lboro} alias. The server was setup
+    using postfix for SMTP, and dovecot for LMTP. That is, postfix handled
+    incoming and outgoing connections, and message storage was handed off to
+    dovecot. For security, postfix only supports authentication over TLS. The
+    mail server handled mail for the \texttt {group2.lboro} domain, allowing a
+    users email to take the form of \texttt{username@group2.lboro}. Dovecot was
+    configured to store users mail in the \texttt{/var/mail/vhosts} directory,
+    and allow access to the mailboxes using IMAP or POP3. Users and their
+    encrypted passwords were specified in the \texttt{/etc/dovecot/dovecot-
+    users} file, such as in Listing~\ref {listing:dovecot-user}.
 
     \begin{lstlisting}[caption={Dovecot user}, label={listing:dovecot-user}]
 chris@group2.lboro:{MD5-CRYPT}$1$GlwLXh30$fLwPLK47HFd/dGdEgPJSB7
     \end{lstlisting}
 
     For the purposes of the demonstration, \texttt{laptop-1} and \texttt
-    {laptop-2} each have an installation of the terminal email client \texttt
+    {laptop-2} each had an installation of the terminal email client \texttt
     {mutt} configured to access the \texttt{mail.group2.lboro} server using
-    IMAP and SMTP. This allows for the sending of emails between two accounts
+    IMAP and SMTP. This allowed for the sending of emails between two accounts
     on the network.
 
