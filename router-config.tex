@@ -176,9 +176,9 @@ would make much difference.
 
 Additionally telnet is also disabled over router VTY lines. This was done
 because telnet sends login information in plaintext, and so is inherently
-insecure. Instead we used RSA for SSH authentication, placing an RSA public key
-on each router and the respective private keys on each laptop.
-
+insecure. Instead we use SSH with RSA keys to allow secure passwordless access.
+Note, this only made SSH authentication passwordless, both router passwords
+remain in place.
 
 \section{Traffic Management}
 In order to simulate a real world situation, traffic entering and leaving our
