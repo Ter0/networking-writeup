@@ -1,0 +1,15 @@
+group2@laptop-3:~$ nslookup alpha.ookup alpha.group2.lboro
+Server:		12.0.1.2
+Address:	12.0.1.2#53
+
+Name:	alpha.group2.lboro
+Address: 12.1.1.1
+
+group2@laptop-3:~$ nslookup alpha.group2.lboro
+Server:		12.0.2.2
+Address:	12.0.2.2#53
+
+Name:	alpha.group2.lboro
+Address: 12.1.1.1
+
+group2@laptop-3:~$ logout

@@ -1,0 +1,604 @@
+Alpha>en
+Password:
+Alpha#sh ip bgp
+BGP table version is 377, local router ID is 12.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *   8.0.0.0/28       10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   8.0.0.16/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   8.0.0.32/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.48/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.64/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *>i 8.0.0.80/28      12.2.2.2                 0    100      0 5607 i
+ *                    10.1.1.1                               0 42 5607 i
+ r>  10.1.1.1/32      10.1.1.1                 0             0 42 i
+ *>  10.2.2.0/24      10.1.1.1                 0             0 42 i
+ * i 12.0.1.0/24      12.3.3.3                20    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i 12.0.2.0/24      12.3.3.3                20    100      0 i
+ *>                   12.0.0.2                20         32768 i
+ * i                  12.2.2.2                 0    100      0 i
+ * i 12.0.3.0/24      12.3.3.3                 0    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   12.0.0.9                20         32768 i
+ * i 12.1.1.1/32      12.3.3.3                20    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i 12.2.2.2/32      12.3.3.3                20    100      0 i
+ * i                  12.2.2.2                 0    100      0 i
+ *>                   12.0.0.2                20         32768 i
+ * i 12.3.3.3/32      12.3.3.3                 0    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   12.0.0.9                20         32768 i
+ *>i 34.0.0.0/28      12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.16/28     12.3.3.3                10    100      0 2792 i
+ *>i 34.0.0.64/28     12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.80/28     12.3.3.3                20    100      0 2792 i
+ *>  56.0.0.0/30      10.1.1.1                               0 42 5607 6871 ?
+ *>  56.0.0.4/30      10.1.1.1                               0 42 2497 6871 ?
+ *>  56.0.0.8/30      10.1.1.1                               0 42 2497 6871 ?
+ *>  56.0.1.0/28      10.1.1.1                               0 42 2497 6871 i
+ *>  56.0.1.16/28     10.1.1.1                               0 42 5607 6871 i
+ --More--              Network          Next Hop            Metric LocPrf Weight Path
+ *>  56.0.1.32/28     10.1.1.1                               0 42 2497 6871 i
+ *>  56.0.2.1/32      10.1.1.1                               0 42 2497 6871 ?
+ *>  56.0.2.2/32      10.1.1.1                               0 42 5607 6871 ?
+ *>  56.0.2.3/32      10.1.1.1                               0 42 5607 6871 ?
+ *>  56.0.3.0/24      10.1.1.1                               0 42 5607 6871 ?
+ * i 78.0.0.0/28      12.3.3.3                 0    100      0 2792 5089 i
+ *>                   10.1.1.1                               0 42 5089 i
+ *>i 78.0.0.16/28     12.3.3.3                 0    100      0 2792 5089 i
+ *                    10.1.1.1                               0 42 2497 5089 i
+ * i 78.0.0.32/28     12.3.3.3                 0    100      0 2792 5089 i
+ *>                   10.1.1.1                               0 42 5089 i
+ *>  112.0.0.16/28    10.1.1.1                               0 42 97 i
+ *>  112.0.0.32/28    10.1.1.1                               0 42 97 i
+ *>  112.0.0.48/28    10.1.1.1                               0 42 97 i
+ *>  112.0.0.64/32    10.1.1.1                               0 42 97 i
+ *>  112.0.0.65/32    10.1.1.1                               0 42 97 i
+ *>  112.0.0.66/32    10.1.1.1                               0 42 97 i
+ *>  121.0.0.0/24     10.1.1.1                               0 42 2497 i
+ *>  121.0.1.0/24     10.1.1.1                               0 42 2497 i
+ *>  121.0.3.0/24     10.1.1.1                               0 42 2497 i
+ *>  121.0.7.2/32     10.1.1.1                               0 42 2497 i
+ *>  121.0.9.0/24     10.1.1.1                               0 42 2497 6871 ?
+Alpha#sh ip bgp nei
+Alpha#sh ip bgp neighbors 10.1.1.1 ad
+Alpha#sh ip bgp neighbors 10.1.1.1 advertised-routes
+BGP table version is 377, local router ID is 12.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>i 8.0.0.0/28       12.2.2.2                 0    100      0 5607 i
+ *>i 8.0.0.16/28      12.2.2.2                 0    100      0 5607 i
+ *>i 8.0.0.32/28      12.2.2.2                20    100      0 5607 i
+ *>i 8.0.0.48/28      12.2.2.2                20    100      0 5607 i
+ *>i 8.0.0.64/28      12.2.2.2                20    100      0 5607 i
+ *>i 8.0.0.80/28      12.2.2.2                 0    100      0 5607 i
+ *>  12.0.1.0/24      0.0.0.0                  0         32768 i
+ *>  12.0.2.0/24      12.0.0.2                20         32768 i
+ *>  12.0.3.0/24      12.0.0.9                20         32768 i
+ *>  12.1.1.1/32      0.0.0.0                  0         32768 i
+ *>  12.2.2.2/32      12.0.0.2                20         32768 i
+ *>  12.3.3.3/32      12.0.0.9                20         32768 i
+ *>i 34.0.0.0/28      12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.16/28     12.3.3.3                10    100      0 2792 i
+ *>i 34.0.0.64/28     12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.80/28     12.3.3.3                20    100      0 2792 i
+
+Total number of prefixes 16
+Alpha#sh ip bgp summ
+Alpha#sh ip bgp summary
+BGP router identifier 12.1.1.1, local AS number 2110
+BGP table version is 377, main routing table version 377
+42 network entries using 6216 bytes of memory
+63 path entries using 4032 bytes of memory
+29/16 BGP path/bestpath attribute entries using 3944 bytes of memory
+11 BGP AS-PATH entries using 264 bytes of memory
+1 BGP community entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 14480 total bytes of memory
+BGP activity 81/39 prefixes, 315/252 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.1.1.1        4           42    1474    1604      377    0    0 23:07:58       32
+12.2.2.2        4         2110    1445    1487      377    0    0 21:28:56       12
+12.3.3.3        4         2110    1496    1485      377    0    0 21:27:40       13
+Alpha#tracerpit   oute 12.1.1    1.0.7.2 sou
+Alpha#traceroute 121.0.7.2 source loop
+Alpha#traceroute 121.0.7.2 source loopback 0
+Type escape sequence to abort.
+Tracing the route to 121.0.7.2
+VRF info: (vrf in name/id, vrf out name/id)
+  1 100.100.105.1 0 msec 0 msec 4 msec
+  2 100.100.16.2 0 msec *  0 msec
+Alpha#traceroute 121.0.7.2 source loopback 0
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 121.0.7.2, timeout is 2 seconds:
+Packet sent with a source address of 12.1.1.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/4 ms
+Alpha#sh ip bgp
+BGP table version is 379, local router ID is 12.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *   8.0.0.0/28       10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   8.0.0.16/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   8.0.0.32/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.48/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.64/28      10.1.1.1                               0 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *>i 8.0.0.80/28      12.2.2.2                 0    100      0 5607 i
+ *                    10.1.1.1                               0 42 5607 i
+ r>  10.1.1.1/32      10.1.1.1                 0             0 42 i
+ *>  10.2.2.0/24      10.1.1.1                 0             0 42 i
+ * i 12.0.1.0/24      12.3.3.3                20    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i 12.0.2.0/24      12.3.3.3                20    100      0 i
+ *>                   12.0.0.2                20         32768 i
+ * i                  12.2.2.2                 0    100      0 i
+ * i 12.0.3.0/24      12.3.3.3                 0    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   12.0.0.9                20         32768 i
+ * i 12.1.1.1/32      12.3.3.3                20    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i 12.2.2.2/32      12.3.3.3                20    100      0 i
+ * i                  12.2.2.2                 0    100      0 i
+ *>                   12.0.0.2                20         32768 i
+ * i 12.3.3.3/32      12.3.3.3                 0    100      0 i
+ * i                  12.2.2.2                20    100      0 i
+ *>                   12.0.0.9                20         32768 i
+ *>i 34.0.0.0/28      12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.16/28     12.3.3.3                10    100      0 2792 i
+ *>i 34.0.0.64/28     12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.80/28     12.3.3.3                20    100      0 2792 i
+ *>  56.0.0.0/30      10.1.1.1                               0 42 5607 6871 ?
+ *>  56.0.0.4/30      10.1.1.1                               0 42 2497 6871 ?
+ *>  56.0.0.8/30      10.1.1.1                               0 42 2497 6871 ?
+ *>  56.0.1.0/28      10.1.1.1                               0 42 2497 6871 i
+ *>  56.0.1.16/28     10.1.1.1                               0 42 5607 6871 i
+ --More--  Network          Next Hop            Metric LocPrf Weight Path
+ *>  56.0.2.1/32      10.1.1.1                               0 42 2497 6871 ?
+ *>  56.0.2.2/32      10.1.1.1                               0 42 5607 6871 ?
+ *>  56.0.2.3/32      10.1.1.1                               0 42 5607 6871 ?
+ *>  56.0.3.0/24      10.1.1.1                               0 42 5607 6871 ?
+ * i 78.0.0.0/28      12.3.3.3                 0    100      0 2792 5089 i
+ *>                   10.1.1.1                               0 42 5089 i
+ *>i 78.0.0.16/28     12.3.3.3                 0    100      0 2792 5089 i
+ *                    10.1.1.1                               0 42 2497 5089 i
+ * i 78.0.0.32/28     12.3.3.3                 0    100      0 2792 5089 i
+ *>                   10.1.1.1                               0 42 5089 i
+ *>  112.0.0.16/28    10.1.1.1                               0 42 97 i
+ *>  112.0.0.32/28    10.1.1.1                               0 42 97 i
+ *>  112.0.0.48/28    10.1.1.1                               0 42 97 i
+ *>  112.0.0.64/32    10.1.1.1                               0 42 97 i
+ *>  112.0.0.65/32    10.1.1.1                               0 42 97 i
+ *>  112.0.0.66/32    10.1.1.1                               0 42 97 i
+ *>  121.0.0.0/24     10.1.1.1                               0 42 2497 i
+ *>  121.0.1.0/24     10.1.1.1                               0 42 2497 i
+ *>  121.0.3.0/24     10.1.1.1                               0 42 2497 i
+ *>  121.0.7.2/32     10.1.1.1                               0 42 2497 i
+ *>  121.0.9.0/24     10.1.1.1                               0 42 2497 6871 ?
+Alpha#ping 121.0.7.2 source loopback 0
+Type escape sequence to abort.
+Tracing the route to 56.0.2.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 100.100.105.1 0 msec 0 msec 0 msec
+  2 100.100.16.2 0 msec 0 msec 0 msec
+  3 121.0.9.2 [AS 6871] 0 msec *  0 msec
+Alpha#ssh bravo.group2.lboro
+Translating "bravo.group2.lboro"...domain server (12.0.1.2) [OK]
+
+Password:
+
+Bravo>en
+Password:
+Bravo#sh ip bgp
+Bravo#sh ip bgp summ
+Bravo#sh ip bgp summary
+BGP router identifier 12.2.2.2, local AS number 2110
+BGP table version is 267, main routing table version 267
+41 network entries using 6068 bytes of memory
+55 path entries using 3520 bytes of memory
+18/16 BGP path/bestpath attribute entries using 2448 bytes of memory
+9 BGP AS-PATH entries using 216 bytes of memory
+1 BGP community entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 12276 total bytes of memory
+BGP activity 181/140 prefixes, 370/315 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+12.1.1.1        4         2110    1491    1448      267    0    0 21:31:21       30
+12.3.3.3        4         2110    1508    1448      267    0    0 21:30:04       13
+12.11.0.2       4         5607    1454    1442      267    0    0 21:31:21        6
+Bravo#sh ip bgp summary
+BGP table version is 267, local router ID is 12.2.2.2
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  8.0.0.0/28       12.11.0.2                0             0 5607 i
+ *>  8.0.0.16/28      12.11.0.2                0             0 5607 i
+ *>  8.0.0.32/28      12.11.0.2               20             0 5607 i
+ *>  8.0.0.48/28      12.11.0.2               20             0 5607 i
+ *>  8.0.0.64/28      12.11.0.2               20             0 5607 i
+ *>  8.0.0.80/28      12.11.0.2                0             0 5607 i
+ *>i 10.1.1.1/32      12.1.1.1                 0    100      0 42 i
+ *>i 10.2.2.0/24      12.1.1.1                 0    100      0 42 i
+ * i 12.0.1.0/24      12.3.3.3                20    100      0 i
+ *>                   12.0.0.1                20         32768 i
+ * i                  12.1.1.1                 0    100      0 i
+ * i 12.0.2.0/24      12.3.3.3                20    100      0 i
+ * i                  12.1.1.1                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i 12.0.3.0/24      12.3.3.3                 0    100      0 i
+ *>                   12.0.0.6                20         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ * i 12.1.1.1/32      12.3.3.3                20    100      0 i
+ *>                   12.0.0.1                20         32768 i
+ * i                  12.1.1.1                 0    100      0 i
+ * i 12.2.2.2/32      12.3.3.3                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ * i 12.3.3.3/32      12.3.3.3                 0    100      0 i
+ *>                   12.0.0.6                20         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ *>i 34.0.0.0/28      12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.16/28     12.3.3.3                10    100      0 2792 i
+ *>i 34.0.0.64/28     12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.80/28     12.3.3.3                20    100      0 2792 i
+ *>i 56.0.0.0/30      12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>i 56.0.0.4/30      12.1.1.1                 0    100      0 42 2497 6871 ?
+ *>i 56.0.0.8/30      12.1.1.1                 0    100      0 42 2497 6871 ?
+ *>i 56.0.1.0/28      12.1.1.1                 0    100      0 42 2497 6871 i
+ *>i 56.0.1.16/28     12.1.1.1                 0    100      0 42 5607 6871 i
+ *>i 56.0.2.1/32      12.1.1.1                 0    100      0 42 2497 6871 ?
+ *>i 56.0.2.2/32      12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>i 56.0.2.3/32      12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>i 56.0.3.0/24      12.1.1.1                 0    100      0 42 5607 6871 ?
+ * i 78.0.0.0/28      12.3.3.3                 0    100      0 2792 5089 i
+ *>i                  12.1.1.1                 0    100      0 42 5089 i
+ --More--              Network          Next Hop            Metric LocPrf Weight Path
+ *>i 78.0.0.16/28     12.3.3.3                 0    100      0 2792 5089 i
+ * i 78.0.0.32/28     12.3.3.3                 0    100      0 2792 5089 i
+ *>i                  12.1.1.1                 0    100      0 42 5089 i
+ *>i 112.0.0.16/28    12.1.1.1                 0    100      0 42 97 i
+ *>i 112.0.0.32/28    12.1.1.1                 0    100      0 42 97 i
+ *>i 112.0.0.48/28    12.1.1.1                 0    100      0 42 97 i
+ *>i 112.0.0.64/32    12.1.1.1                 0    100      0 42 97 i
+ *>i 112.0.0.65/32    12.1.1.1                 0    100      0 42 97 i
+ *>i 112.0.0.66/32    12.1.1.1                 0    100      0 42 97 i
+ *>i 121.0.0.0/24     12.1.1.1                 0    100      0 42 2497 i
+ *>i 121.0.1.0/24     12.1.1.1                 0    100      0 42 2497 i
+ *>i 121.0.3.0/24     12.1.1.1                 0    100      0 42 2497 i
+ *>i 121.0.7.2/32     12.1.1.1                 0    100      0 42 2497 i
+ *>i 121.0.9.0/24     12.1.1.1                 0    100      0 42 2497 6871 ?
+Bravo#sh ip bgp ne
+Bravo#sh ip bgp neigh
+Bravo#sh ip bgp neighbors 12.2.  11.0.2
+BGP neighbor is 12.11.0.2,  remote AS 5607, external link
+ Description: PEER_TO_GROUP1
+  BGP version 4, remote router ID 8.1.1.1
+  BGP state = Established, up for 21:31:48
+  Last read 00:00:40, last write 00:00:10, hold time is 180, keepalive interval is 60 seconds
+  Neighbor sessions:
+    1 active, is not multisession capable (disabled)
+  Neighbor capabilities:
+    Route refresh: advertised and received(new)
+    Four-octets ASN Capability: advertised and received
+    Address family IPv4 Unicast: advertised and received
+    Enhanced Refresh Capability: advertised and received
+    Multisession Capability:
+    Stateful switchover support enabled: NO for session 1
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+
+                         Sent       Rcvd
+    Opens:                  1          1
+    Notifications:          0          0
+    Updates:               18         39
+    Keepalives:          1424       1410
+    Route Refresh:          0          0
+    Total:               1443       1454
+  Default minimum time between advertisement runs is 30 seconds
+
+ For address family: IPv4 Unicast
+  Session: 12.11.0.2
+  BGP table version 267, neighbor version 267/0
+  Output queue size : 0
+  Index 13, Advertise bit 1
+  13 update-group member
+  Inbound path policy configured
+  Outgoing update prefix filter list is OUT_PEER_ROUTES
+  Route map for incoming advertisements is PEER_NOEXPORT
+  Slow-peer detection is disabled
+  Slow-peer split-update-group dynamic is disabled
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               8          6 (Consumes 384 bytes)
+    Prefixes Total:                10         26
+    Implicit Withdraw:              0         10
+    Explicit Withdraw:             21         10
+    Used as bestpath:             n/a          6
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+ --More--
+Bravo#sh ip bgp neighbors 12.11.0.2 ad
+Bravo#sh ip bgp neighbors 12.11.0.2 advertised-routes
+BGP table version is 267, local router ID is 12.2.2.2
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>i 10.1.1.1/32      12.1.1.1                 0    100      0 42 i
+ *>i 10.2.2.0/24      12.1.1.1                 0    100      0 42 i
+ *>  12.0.1.0/24      12.0.0.1                20         32768 i
+ *>  12.0.2.0/24      0.0.0.0                  0         32768 i
+ *>  12.0.3.0/24      12.0.0.6                20         32768 i
+ *>  12.1.1.1/32      12.0.0.1                20         32768 i
+ *>  12.2.2.2/32      0.0.0.0                  0         32768 i
+ *>  12.3.3.3/32      12.0.0.6                20         32768 i
+
+Total number of prefixes 8
+Bravo#sh ip bgp neighbors 12.11.0.2 advertised-routes
+BGP table version is 267, local router ID is 12.2.2.2
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  8.0.0.0/28       12.11.0.2                0             0 5607 i
+ *>  8.0.0.16/28      12.11.0.2                0             0 5607 i
+ *>  8.0.0.32/28      12.11.0.2               20             0 5607 i
+ *>  8.0.0.48/28      12.11.0.2               20             0 5607 i
+ *>  8.0.0.64/28      12.11.0.2               20             0 5607 i
+ *>  8.0.0.80/28      12.11.0.2                0             0 5607 i
+ *>i 10.1.1.1/32      12.1.1.1                 0    100      0 42 i
+ *>i 10.2.2.0/24      12.1.1.1                 0    100      0 42 i
+ * i 12.0.1.0/24      12.3.3.3                20    100      0 i
+ *>                   12.0.0.1                20         32768 i
+ * i                  12.1.1.1                 0    100      0 i
+ * i 12.0.2.0/24      12.3.3.3                20    100      0 i
+ * i                  12.1.1.1                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i 12.0.3.0/24      12.3.3.3                 0    100      0 i
+ *>                   12.0.0.6                20         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ * i 12.1.1.1/32      12.3.3.3                20    100      0 i
+ *>                   12.0.0.1                20         32768 i
+ * i                  12.1.1.1                 0    100      0 i
+ * i 12.2.2.2/32      12.3.3.3                20    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ * i 12.3.3.3/32      12.3.3.3                 0    100      0 i
+ *>                   12.0.0.6                20         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ *>i 34.0.0.0/28      12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.16/28     12.3.3.3                10    100      0 2792 i
+ *>i 34.0.0.64/28     12.3.3.3                 0    100      0 2792 i
+ *>i 34.0.0.80/28     12.3.3.3                20    100      0 2792 i
+ *>i 56.0.0.0/30      12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>i 56.0.0.4/30      12.1.1.1                 0    100      0 42 2497 6871 ?
+ *>i 56.0.0.8/30      12.1.1.1                 0    100      0 42 2497 6871 ?
+ *>i 56.0.1.0/28      12.1.1.1                 0    100      0 42 2497 6871 i
+ *>i 56.0.1.16/28     12.1.1.1                 0    100      0 42 5607 6871 i
+ *>i 56.0.2.1/32      12.1.1.1                 0    100      0 42 2497 6871 ?
+ *>i 56.0.2.2/32      12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>i 56.0.2.3/32      12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>i 56.0.3.0/24      12.1.1.1                 0    100      0 42 5607 6871 ?
+ * i 78.0.0.0/28      12.3.3.3                 0    100      0 2792 5089 i
+ *>i                  12.1.1.1                 0    100      0 42 5089 i
+ --More--
+Bravo#traceor  route 56.0.2.1 sou
+Bravo#traceroute 56.0.2.1 source loop0
+Type escape sequence to abort.
+Tracing the route to 56.0.2.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.0.0.1 0 msec 0 msec 0 msec
+  2 100.100.105.1 4 msec 0 msec 0 msec
+  3 100.100.16.2 4 msec 0 msec 4 msec
+  4 121.0.9.2 [AS 6871] 0 msec *  0 msec
+Bravo#traceroute 56.0.2.1 source loop0       vlan
+Bravo#traceroute 56.0.2.1 source vlan 2
+Type escape sequence to abort.
+Tracing the route to 56.0.2.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.0.0.1 0 msec 0 msec 4 msec
+  2 100.100.105.1 0 msec 0 msec 4 msec
+  3 100.100.16.2 0 msec 4 msec 0 msec
+  4 121.0.9.2 [AS 6871] 4 msec *  0 msec
+Bravo#traceroute 56.0.2.1 source vlan 2                                 ping 56.0 0.2.1 sou
+Bravo#ping 56.0.2.1 source loo
+Bravo#ping 56.0.2.1 source loopback - 0
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 56.0.2.1, timeout is 2 seconds:
+Packet sent with a source address of 12.2.2.2
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/4 ms
+Bravo#traceor  route 10.1.1.1 sou
+Bravo#traceroute 10.1.1.1 source loo
+Bravo#traceroute 10.1.1.1 source loopback 0
+Type escape sequence to abort.
+Tracing the route to 10.1.1.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.0.0.1 0 msec 0 msec 0 msec
+  2 100.100.105.1 0 msec *  0 msec
+Bravo#s exit
+
+[Connection to bravo.group2.lboro closed by foreign host]
+Alpha#ssh bravo.group2.lboro.group2.lboro
+Password:
+Charlie>sh ip bgp summary
+BGP router identifier 12.3.3.3, local AS number 2110
+BGP table version is 264, main routing table version 264
+41 network entries using 6068 bytes of memory
+83 path entries using 5312 bytes of memory
+32/16 BGP path/bestpath attribute entries using 4352 bytes of memory
+14 BGP AS-PATH entries using 384 bytes of memory
+1 BGP community entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 16140 total bytes of memory
+BGP activity 109/68 prefixes, 444/361 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+12.1.1.1        4         2110    1492    1505      264    0    0 21:33:24       30
+12.2.2.2        4         2110    1451    1512      264    0    0 21:33:24       12
+12.13.0.2       4         2792      74      57      264    0    0 00:45:49       35
+Charlie>sh ip bgp summary
+BGP table version is 264, local router ID is 12.3.3.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *   8.0.0.0/28       12.13.0.2                              0 2792 5089 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   8.0.0.16/28      12.13.0.2                              0 2792 5089 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   8.0.0.32/28      12.13.0.2                              0 2792 5089 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.48/28      12.13.0.2                              0 2792 5089 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.64/28      12.13.0.2                              0 2792 5089 42 5607 i
+ *>i                  12.2.2.2                20    100      0 5607 i
+ *   8.0.0.80/28      12.13.0.2                              0 2792 5089 42 5607 i
+ *>i                  12.2.2.2                 0    100      0 5607 i
+ *   10.1.1.1/32      12.13.0.2                              0 2792 5089 42 i
+ *>i                  12.1.1.1                 0    100      0 42 i
+ *   10.2.2.0/24      12.13.0.2                              0 2792 5089 42 i
+ *>i                  12.1.1.1                 0    100      0 42 i
+ * i 12.0.1.0/24      12.2.2.2                20    100      0 i
+ *>                   12.0.0.10               20         32768 i
+ * i                  12.1.1.1                 0    100      0 i
+ *>  12.0.2.0/24      12.0.0.5                20         32768 i
+ * i                  12.1.1.1                20    100      0 i
+ * i                  12.2.2.2                 0    100      0 i
+ *>  12.0.3.0/24      0.0.0.0                  0         32768 i
+ * i                  12.2.2.2                20    100      0 i
+ * i                  12.1.1.1                20    100      0 i
+ *>  12.1.1.1/32      12.0.0.10               20         32768 i
+ * i                  12.2.2.2                20    100      0 i
+ * i                  12.1.1.1                 0    100      0 i
+ *>  12.2.2.2/32      12.0.0.5                20         32768 i
+ * i                  12.2.2.2                 0    100      0 i
+ * i                  12.1.1.1                20    100      0 i
+ *>  12.3.3.3/32      0.0.0.0                  0         32768 i
+ * i                  12.2.2.2                20    100      0 i
+ * i                  12.1.1.1                20    100      0 i
+ *>  34.0.0.0/28      12.13.0.2                0             0 2792 i
+ *>  34.0.0.16/28     12.13.0.2               10             0 2792 i
+ *>  34.0.0.64/28     12.13.0.2                              0 2792 i
+ *>  34.0.0.80/28     12.13.0.2               20             0 2792 i
+ *   56.0.0.0/30      12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 5607 6871 ?
+ *   56.0.0.4/30      12.13.0.2                              0 2792 5089 2497 6871 ?
+ --More--              Network          Next Hop            Metric LocPrf Weight Path
+ *>i                  12.1.1.1                 0    100      0 42 2497 6871 ?
+ *   56.0.0.8/30      12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 2497 6871 ?
+ *   56.0.1.0/28      12.13.0.2                              0 2792 5089 2497 6871 i
+ *>i                  12.1.1.1                 0    100      0 42 2497 6871 i
+ *   56.0.1.16/28     12.13.0.2                              0 2792 5089 2497 6871 i
+ *>i                  12.1.1.1                 0    100      0 42 5607 6871 i
+ *   56.0.2.1/32      12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 2497 6871 ?
+ *   56.0.2.2/32      12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 5607 6871 ?
+ *   56.0.2.3/32      12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 5607 6871 ?
+ *   56.0.3.0/24      12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 5607 6871 ?
+ *>  78.0.0.0/28      12.13.0.2                              0 2792 5089 i
+ * i                  12.1.1.1                 0    100      0 42 5089 i
+ *>  78.0.0.16/28     12.13.0.2                              0 2792 5089 i
+ *>  78.0.0.32/28     12.13.0.2                              0 2792 5089 i
+ * i                  12.1.1.1                 0    100      0 42 5089 i
+ *   112.0.0.16/28    12.13.0.2                              0 2792 5089 42 97 i
+ *>i                  12.1.1.1                 0    100      0 42 97 i
+ *   112.0.0.32/28    12.13.0.2                              0 2792 5089 42 97 i
+ *>i                  12.1.1.1                 0    100      0 42 97 i
+ *   112.0.0.48/28    12.13.0.2                              0 2792 5089 42 97 i
+ *>i                  12.1.1.1                 0    100      0 42 97 i
+ *   112.0.0.64/32    12.13.0.2                              0 2792 5089 42 97 i
+ *>i                  12.1.1.1                 0    100      0 42 97 i
+ *   112.0.0.65/32    12.13.0.2                              0 2792 5089 42 97 i
+ *>i                  12.1.1.1                 0    100      0 42 97 i
+ *   112.0.0.66/32    12.13.0.2                              0 2792 5089 42 97 i
+ *>i                  12.1.1.1                 0    100      0 42 97 i
+ *   121.0.0.0/24     12.13.0.2                              0 2792 5089 2497 i
+ *>i                  12.1.1.1                 0    100      0 42 2497 i
+ *   121.0.1.0/24     12.13.0.2                              0 2792 5089 2497 i
+ *>i                  12.1.1.1                 0    100      0 42 2497 i
+ *   121.0.3.0/24     12.13.0.2                              0 2792 5089 2497 i
+ *>i                  12.1.1.1                 0    100      0 42 2497 i
+ *   121.0.7.2/32     12.13.0.2                              0 2792 5089 2497 i
+ *>i                  12.1.1.1                 0    100      0 42 2497 i
+ *   121.0.9.0/24     12.13.0.2                              0 2792 5089 2497 6871 ?
+ *>i                  12.1.1.1                 0    100      0 42 2497 6871 ?
+Charlie>sh ip bgp neig
+Charlie>sh ip bgp neighbors 12.11.  3.0.2 ad
+Charlie>sh ip bgp neighbors 12.13.0.2 advertised-routes
+BGP table version is 264, local router ID is 12.3.3.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>i 10.1.1.1/32      12.1.1.1                 0    100      0 42 i
+ *>i 10.2.2.0/24      12.1.1.1                 0    100      0 42 i
+ *>  12.0.1.0/24      12.0.0.10               20         32768 i
+ *>  12.0.2.0/24      12.0.0.5                20         32768 i
+ *>  12.0.3.0/24      0.0.0.0                  0         32768 i
+ *>  12.1.1.1/32      12.0.0.10               20         32768 i
+ *>  12.2.2.2/32      12.0.0.5                20         32768 i
+ *>  12.3.3.3/32      0.0.0.0                  0         32768 i
+
+Total number of prefixes 8
+Charlie>exit
+
+[Connection to charlie.group2.lboro closed by foreign host]
+Alpha#exit

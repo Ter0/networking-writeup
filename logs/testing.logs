@@ -1,0 +1,227 @@
+Alpha>en
+Password:
+% Password:  timeout expired!
+Password:
+% Password:  timeout expired!
+Password:
+% Password:  timeout expired!
+% Bad secrets
+
+Alpha>ssh bravo.group2.lboro
+Password:
+Bravo>en
+Password:
+Bravo#sh ip bgp 34.0.0.564
+BGP routing table entry for 34.0.0.64/28, version 255
+Paths: (1 available, best #1, table default)
+  Not advertised to any peer
+  Refresh Epoch 1
+  2792
+    12.3.3.3 (metric 20) from 12.3.3.3 (12.3.3.3)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 255
+Paths: (1 available, best #1, table default)
+  Not advertised to any peer
+  Refresh Epoch 1
+  2792
+    12.3.3.3 (metric 20) from 12.3.3.3 (12.3.3.3)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 276
+Paths: (1 available, best #1, table default, not advertised to EBGP peer)
+Flag: 0x820
+  Not advertised to any peer
+  Refresh Epoch 2
+  42 2497 5089 2792
+    12.1.1.1 (metric 20) from 12.1.1.1 (12.1.1.1)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+      Community: no-export
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 276
+Paths: (1 available, best #1, table default, not advertised to EBGP peer)
+Flag: 0x820
+  Not advertised to any peer
+  Refresh Epoch 2
+  42 2497 5089 2792
+    12.1.1.1 (metric 20) from 12.1.1.1 (12.1.1.1)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+      Community: no-export
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 276
+Paths: (1 available, best #1, table default, not advertised to EBGP peer)
+Flag: 0x820
+  Not advertised to any peer
+  Refresh Epoch 2
+  42 2497 5089 2792
+    12.1.1.1 (metric 20) from 12.1.1.1 (12.1.1.1)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+      Community: no-export
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 276
+Paths: (1 available, best #1, table default, not advertised to EBGP peer)
+Flag: 0x820
+  Not advertised to any peer
+  Refresh Epoch 2
+  42 2497 5089 2792
+    12.1.1.1 (metric 20) from 12.1.1.1 (12.1.1.1)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+      Community: no-export
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 276
+Paths: (1 available, best #1, table default, not advertised to EBGP peer)
+  Not advertised to any peer
+  Refresh Epoch 2
+  42 2497 5089 2792
+    12.1.1.1 (metric 20) from 12.1.1.1 (12.1.1.1)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+      Community: no-export
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 276
+Paths: (1 available, best #1, table default, not advertised to EBGP peer)
+  Not advertised to any peer
+  Refresh Epoch 2
+  42 2497 5089 2792
+    12.1.1.1 (metric 20) from 12.1.1.1 (12.1.1.1)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+      Community: no-export
+Bravo#sh ip bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 280
+Paths: (1 available, best #1, table default)
+Flag: 0x820
+  Not advertised to any peer
+  Refresh Epoch 1
+  2792
+    12.3.3.3 (metric 20) from 12.3.3.3 (12.3.3.3)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+Bravo#sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  up                    up
+GigabitEthernet0/1         12.0.0.2        YES NVRAM  up                    up
+GigabitEthernet0/0/0       unassigned      YES unset  up                    up
+GigabitEthernet0/0/1       unassigned      YES unset  up                    up
+GigabitEthernet0/0/2       unassigned      YES unset  down                  down
+GigabitEthernet0/0/3       unassigned      YES unset  down                  down
+Loopback0                  12.2.2.2        YES NVRAM  up                    up
+Vlan1                      unassigned      YES unset  down                  down
+Vlan2                      12.0.2.1        YES NVRAM  up                    up
+Vlan3                      12.11.0.1       YES NVRAM  up                    up
+Bravo#ping 12.0.0.2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.0.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+Bravo#sh ip int brief bgp 34.0.0.64
+BGP routing table entry for 34.0.0.64/28, version 280
+Paths: (1 available, best #1, table default)
+  Not advertised to any peer
+  Refresh Epoch 1
+  2792
+    12.3.3.3 (metric 20) from 12.3.3.3 (12.3.3.3)
+      Origin IGP, metric 0, localpref 100, valid, internal, best
+Bravo#
+Bravo#exit
+
+[Connection to bravo.group2.lboro closed by foreign host]
+Alpha>en
+Password:
+Bravo>en
+Password:
+Bravo#sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  up                    up
+GigabitEthernet0/1         12.0.0.2        YES NVRAM  up                    up
+GigabitEthernet0/0/0       unassigned      YES unset  up                    up
+GigabitEthernet0/0/1       unassigned      YES unset  up                    up
+GigabitEthernet0/0/2       unassigned      YES unset  down                  down
+GigabitEthernet0/0/3       unassigned      YES unset  down                  down
+Loopback0                  12.2.2.2        YES NVRAM  up                    up
+Vlan1                      unassigned      YES unset  down                  down
+Vlan2                      12.0.2.1        YES NVRAM  up                    up
+Vlan3                      12.11.0.1       YES NVRAM  up                    up
+Bravo#ping 12.0.0.6
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.0.0.6, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+Bravo#trace 12.0.0.6
+Type escape sequence to abort.
+Tracing the route to 12.0.0.6
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.0.0.6 0 msec *  0 msec
+Bravo#trace 12.0.0.6ping 12.0.0.6 sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  down                  down
+GigabitEthernet0/1         12.0.0.2        YES NVRAM  up                    up
+GigabitEthernet0/0/0       unassigned      YES unset  up                    up
+GigabitEthernet0/0/1       unassigned      YES unset  up                    up
+GigabitEthernet0/0/2       unassigned      YES unset  down                  down
+GigabitEthernet0/0/3       unassigned      YES unset  down                  down
+Loopback0                  12.2.2.2        YES NVRAM  up                    up
+Vlan1                      unassigned      YES unset  down                  down
+Vlan2                      12.0.2.1        YES NVRAM  up                    up
+Vlan3                      12.11.0.1       YES NVRAM  up                    up
+Bravo#sh ip int brief trace 12.0.0.6  ping 12.0.0.6
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.0.0.6, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+Bravo#ping 12.0.0.6
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.0.0.6, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+Bravo#sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  up                    up
+GigabitEthernet0/1         12.0.0.2        YES NVRAM  up                    up
+GigabitEthernet0/0/0       unassigned      YES unset  up                    up
+GigabitEthernet0/0/1       unassigned      YES unset  up                    up
+GigabitEthernet0/0/2       unassigned      YES unset  down                  down
+GigabitEthernet0/0/3       unassigned      YES unset  down                  down
+Loopback0                  12.2.2.2        YES NVRAM  up                    up
+Vlan1                      unassigned      YES unset  down                  down
+Vlan2                      12.0.2.1        YES NVRAM  up                    up
+Vlan3                      12.11.0.1       YES NVRAM  up                    up
+Bravo#ping 12.3.3.3
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.3.3.3, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/4 ms
+Bravo#ping 12.3.3.3
+Type escape sequence to abort.
+Tracing the route to charlie.group2.lboro (12.3.3.3)
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.0.0.6 4 msec *  0 msec
+Bravo#sh ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down
+GigabitEthernet0/0         12.0.0.5        YES NVRAM  down                  down
+GigabitEthernet0/1         12.0.0.2        YES NVRAM  up                    up
+GigabitEthernet0/0/0       unassigned      YES unset  up                    up
+GigabitEthernet0/0/1       unassigned      YES unset  up                    up
+GigabitEthernet0/0/2       unassigned      YES unset  down                  down
+GigabitEthernet0/0/3       unassigned      YES unset  down                  down
+Loopback0                  12.2.2.2        YES NVRAM  up                    up
+Vlan1                      unassigned      YES unset  down                  down
+Vlan2                      12.0.2.1        YES NVRAM  up                    up
+Vlan3                      12.11.0.1       YES NVRAM  up                    up
+Bravo#sh ip int brief traceroute 12.3.3.3ping 12.3.3.3
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 12.3.3.3, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 1/1/1 ms
+Bravo#ping 12.3.3.3sh ip int brief traceroute 12.3.3.3
+Type escape sequence to abort.
+Tracing the route to charlie.group2.lboro (12.3.3.3)
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.0.0.1 4 msec 0 msec 0 msec
+  2 12.0.0.9 4 msec *  0 msec
+Bravo#exit
+
+[Connection to bravo.group2.lboro closed by foreign host]
+Alpha>exit
