@@ -159,27 +159,28 @@ router bgp 2110
 \end{lstlisting}
 
 \section{Security}
-The first security measure we use is having a user account for every router and
-laptop in our setup. For ease of use all users are called ``group''. This added
-the first layer of security,  meaning a password was required to access the
-devices.
+The first security measure we used was having a user account for every router
+and laptop in our setup. For ease of use all users were called ``group''. This
+added the first layer of security, meaning a password was required to access
+the devices.
 
-For routers, a second ``enable'' password is present, this is used to enter
-enable mode on the routers and set with the command \texttt{enable password
-\#\#\#\#\#}. The command \texttt{service password-encryption} was then used to
-encrypt the passwords so they do not appear in the router configuration files
-in plaintext. It should be noted that \texttt{service password-encryption} uses
-a weak form of encryption~\cite{ciscocracker}, mainly to avoid issues like
-should-surfing for example. The alternate option would of been to use
+For routers, a second ``enable'' password was enforced. This was used to
+prevent users entering enable mode on the routers and set with the command
+\texttt{enable password \#\#\#\#\#}. The command \texttt{service password-
+encryption} was then used to encrypt the passwords so they did not appear in
+the router configuration files as plaintext. It should be noted that
+\texttt{service password-encryption} uses a weak form of
+encryption~\cite{ciscocracker}, and so is best used as a deterent for issues
+like shoulder-surfing. The alternate option would of been to use
 \texttt{enable secret \#\#\#\#\#} instead which stores the password as an MD5
-hash, however seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
+hash. However seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
 would make much difference.
 
-Additionally telnet is also disabled over router VTY lines. This was done
+Additionally telnet was also disabled over router VTY lines. This was done
 because telnet sends login information in plaintext, and so is inherently
-insecure. Instead we use SSH with RSA keys to allow secure passwordless access.
-Note, this only made SSH authentication passwordless, both router passwords
-remain in place.
+insecure. Instead we used SSH with RSA keys to allow secure passwordless
+access. Note that this only made SSH authentication passwordless, both router
+passwords remained in place.
 
 \section{Traffic Management}
 In order to simulate a real world situation, traffic entering and leaving our
