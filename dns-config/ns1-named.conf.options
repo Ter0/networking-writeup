@@ -1,35 +1,35 @@
 acl "trusted-ns" {
-	12.0.2.2;
+    12.0.2.2;
 };
 
 options {
-	directory "/var/cache/bind";
+    directory "/var/cache/bind";
 
-	dnssec-enable no;
+    dnssec-enable no;
 
-	dnssec-validation no;
+    dnssec-validation no;
 
-	empty-zones-enable yes;
+    empty-zones-enable no;
 
-	recursion yes;
+    recursion yes;
 
-	allow-recursion {
-		any;
-	};
+    allow-recursion {
+        any;
+    };
 
-	allow-query {
-		any;
-	};
+    allow-query {
+        any;
+    };
 
-	allow-transfer {
-		trusted-ns;
-	};
+    allow-transfer {
+        trusted-ns;
+    };
 
-	forwarders {
-		10.2.2.1;
-	};
+    forwarders {
+        10.2.2.1;
+    };
 
-	listen-on-v6 {
-		any;
-	};
+    listen-on-v6 {
+        any;
+    };
 };
