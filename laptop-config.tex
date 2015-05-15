@@ -1,13 +1,16 @@
 \chapter{Laptop Configuration}
 \section{DNS}
-    DNS was configured for the entire \texttt{12.0.0.0/24} block and \texttt
+    Bind9 ``is the market share leader for domain name system (DNS) server software,
+    with something like 85 per cent of installations worldwide.''.~\cite{Mohan2010}
+    With such a huge level of popularity, it made sense to use Bind9 when configuring
+    our own network. DNS was configured for the entire \texttt{12.0.0.0/24} block and \texttt
     {2020:b012::/32} block using the \texttt{.group2.lboro} domain. The two DNS
     servers: \texttt{ns1.group2.lboro} and \texttt{ns2.group2.lboro} were
     arranged to provide redundancy.
     \texttt{ns1} was hosted on \texttt{laptop-1} and operated as the master
     nameserver. \texttt{ns2} was configured as a slave to the \texttt{ns1}
     master. Appendix~\ref{appendix:bind9} contains the configuration files used
-    to configure the DNS software, Bind9. The three zone files found in
+    to configure Bind9. The three zone files found in
     Listings~\ref {listing:master-dns-db-group2},~\ref{listing:master-dns-db-12} and~\ref {listing:master-dns-db-2020-b012} provided forward DNS
     resolution for IPv4 and IPv6, reverse DNS resolution for IPv4 and reverse
     DNS resolution for IPv6 respectively. The six devices on the network each
