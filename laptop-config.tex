@@ -41,12 +41,12 @@
     using postfix for SMTP, and dovecot for LMTP. That is, postfix handled
     incoming and outgoing connections, and message storage was handed off to
     dovecot. For security, postfix only supports authentication over TLS. The
-    mail server handled mail for the \texttt {group2.lboro} domain, allowing a
+    mail server handled mail for the \texttt{group2.lboro} domain, allowing a
     users email to take the form of \texttt{username@group2.lboro}. Dovecot was
     configured to store users mail in the \texttt{/var/mail/vhosts} directory,
     and allow access to the mailboxes using IMAP or POP3. Users and their
-    encrypted passwords were specified in the \texttt{/etc/dovecot/dovecot-
-    users} file, such as in Listing~\ref {listing:dovecot-user}.
+    encrypted passwords were specified in the \texttt{/etc/dovecot/dovecot-users}
+    file, such as in Listing~\ref{listing:dovecot-user}.
 
     \begin{lstlisting}[caption={Dovecot user}, label={listing:dovecot-user}]
 chris@group2.lboro:{MD5-CRYPT}$1$GlwLXh30$fLwPLK47HFd/dGdEgPJSB7
