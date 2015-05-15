@@ -111,10 +111,10 @@ intuitive way. The exact schemas are outlined in Figure~\ref{figure:network-allo
 \clearpage
 
 \subsection{IPv6}
-When allocating the IPv6 address-space we took a similar approach to that of
+When allocating our IPv6 address space we took a similar approach to that of
 IPv4, aiming to allocate an appropriate sized address block to each segment of
-the network. As such the classifications used are approximately the same as
-IPv4, with network segments being either a Customer Segment, Point-to-point
+our network. As such, the classifications used were approximately the same as
+for IPv4, with network segments being either a Customer Segment, Point-to-point
 link or a Loopback. This is detailed in Figure~\ref{figure:network-alloc-3}.
 
 \begin{figure}[!ht]
@@ -126,39 +126,36 @@ link or a Loopback. This is detailed in Figure~\ref{figure:network-alloc-3}.
         \hline \textbf{Address Type} & \textbf{Subnet Mask} & \textbf{Justification} \\
 
         \hline
-        Customer Segment & \texttt{/36} & This address space was allocated for
-        downstream connections to the ISPs customers. It had a large subnet
-        mask to allow for it to be broken down into subnets containing the
-        48-bit Global Routing Prefix for customer networks.\\
+        Customer Segment & \texttt{/36} & Allocated for downstream connections
+        to our ISP's customers. A large subnet mask was used to allow for
+        allocations to be broken down into subnets containing a 48-bit Global
+        Routing Prefix for customer networks.\\
 
         \hline
-        Point-to-point Links & \texttt{/64} & These addresses were used for
-        links that directly connected two routers, requiring two unique IP
-        addresses. Reasons for the size of the subnet mask used are discussed
-        below.\\
-
+        Point-to-point Links & \texttt{/64} & Used for links that directly
+        connected two routers, requiring two unique IP addresses. Reasons for
+        using a \texttt{/64} subnet mask are discussed below.\\
         \hline
-        Loopback Address & \texttt{/128} & Addresses used for the loopback
-        interfaces on the routers, there was only a requirement for a single
-        address as was the case with IPv4. In IPv6 a \texttt{/128} mask
-        produces this.\\
+        Loopback Address & \texttt{/128} & Used for the loopback interfaces on
+        our routers. There was only a requirement for a single address, as with
+        IPv4. In IPv6 a \texttt{/128} mask produces this.\\
 
         \hline
     \end{tabular}
 \end{figure}
 
 Customer Segments used a \texttt{/36} mask as a method of breaking down our
-customer networks into a more manageable block of addresses. The \texttt{/36}
-mask allowed for us to further break down our Customer Segments into IPv6
-blocks with a 48-bit Global Routing Prefix, which is a unique ID for an IPv6
-address which can be used identify both the ISP and the customer.
+customer networks into more manageable blocks of addresses. The \texttt{/36}
+mask allowed us to further break down our Customer Segments into IPv6 blocks
+with a 48-bit Global Routing Prefix, which is a unique ID for an IPv6 address
+and can be used identify both the ISP and the customer.
 
 In Figure~\ref{figure:network-alloc-3} it is obvious that applying a
-\texttt{/64} mask allocates a considerable amount of addresses to a network
-which would otherwise only require two unique addresses. The decision to use
-this address was taken from RFC 4291, which dictates that ``For all unicast
+\texttt{/64} mask for point-to-point links allocates a considerable amount of
+addresses to a network which would otherwise only require two. The decision to
+do this was taken from RFC 4291, which dictates that ``For all unicast
 addresses, except those that start with the binary value 000, Interface IDs are
-required to be 64 bits long''~\cite{rfc4291}. In recent years there have been
-discussions that the allocation of such a large amount of addresses is wasteful
-and that the use of a \texttt{/127} mask should be endorsed. However this is
-not a standard and for the purposes of this lab we have adhered to the RFC instead.
+required to be 64 bits long''~\cite{rfc4291}. There has been some discussion as
+to wether this practise is wasteful\cite{ipv6waste}, however there are
+some convincing counter arguments\cite{ipv6notwaste} and for the purposes of
+this lab we have chosen to adhere to the RFC.
