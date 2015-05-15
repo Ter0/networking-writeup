@@ -1,6 +1,6 @@
 \chapter{Testing}
 \section{Network Infrastructure Testing}
-Testing of the router configurations was be implemented by viewing the routing
+Testing of the router configurations was performed by viewing the routing
 information of the running network. For the testing of this lab network we
 opted to test both the routes distributed in normal operation and the fail-over
 behaviour of the network should link failure occur. These tests were
@@ -11,7 +11,7 @@ taken by traffic between routers in both normal operation and when the link
 being used was removed. Such a scenario gave an indication as to how resilient
 the interior network was to device failure, as can be seen in
 Listing~\ref{listing:isis-testing}. In this test, we first checked connectivity
-to Charlie and the route taken to this location via GigabitEthernet0/0. We then
+to Charlie from Bravo and the route taken to this location via GigabitEthernet0/0. We then
 removed the link from Bravo to Charlie, forcing the IS-IS process to find an
 alternate route. As can be seen in the figure, the time taken for IS-IS
 convergence was enough to drop two ICMP Ping packets. However after these
@@ -59,8 +59,8 @@ VRF info: (vrf in name/id, vrf out name/id)
 2 12.0.0.9 4 msec *  0 msec
 \end{lstlisting}
 
-Testing the EGP configuration was implemented by checking that prefixes we
-received from our peers were expected and correct, in addition to this we also
+Testing of the EGP configuration was implemented by checking that prefixes we
+received from our peers were expected and correct. In addition to this we also
 tested that iBGP received the external prefixes with the correct next-hop
 address. Listing~\ref{listing:bgp-table} shows a condensed version of the BGP
 Prefix Table found on Alpha. It can be seen that there were redundant routes to
@@ -138,7 +138,7 @@ Network          Next Hop            Metric LocPrf Weight Path
 ...
 \end{lstlisting}
 
-One feature our BT's routing policy was providing a back-up link to each of our
+One feature of BT's routing policy was providing a back-up link to each of our
 Peer's providers, in both cases this was AS 42 (\texttt{10.0.0.0/8}). To
 provide this redundancy without allowing our network to be exploited we
 employed policy to restrict the distribution of prefixes between our peers. Our
