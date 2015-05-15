@@ -63,11 +63,11 @@ Figure~\ref{figure:network-alloc-1}.
     \end{tabular}
 \end{figure}
 In addition to the classification of subnets based on size, we used several IP
-schemas to choose the IP values of our networks from our allocated block. This
-allowed for quick identification of a network from its IP without referencing
-our network diagrams. For example, customer segments connected to the Alpha
-router had a third octet value of 1, so it was immediately apparent that the IP
-\texttt{12.0.1.0/24} was connected to Alpha.
+schemas to choose the IP values of our networks. This allowed for quick
+identification of a network from its IP address without referencing our network
+diagrams. For example, customer segments connected to the Alpha router had a
+third octet value of 1, so it was immediately apparent that the IP address
+\texttt{12.0.1.2/24} was connected to Alpha.
 
 These conventions were decided in advance of our network build-out and helped
 us diagnose issues with IP or interior routing configurations in a more
@@ -83,23 +83,24 @@ intuitive way. The exact schemas are outlined in Figure~\ref{figure:network-allo
         \textbf{Schema} & \textbf{Classification} & \textbf{Identifying Feature} \\
 
         \hline
-        \texttt{12.0.\#.0/24} & Customer Segment & The hash dictates the ISP
-        router that this address space would be connected to, 1 through 3 for
-        Alpha, Bravo and Charlie. This could be scaled up to 253 additional
-        subnets in the Service Provider.\\
+        \texttt{12.0.\#.0/24} & Customer Segment & The hash here dictated the
+        ISP router that this address space was connected to, 1 through 3 for
+        Alpha, Bravo and Charlie. This could of been scaled up to 253
+        additional subnets for our Service Provider.\\
         \hline
         \texttt{12.\#.0.0/30}, where $\#> 10$ & Peer Point-to-point Link &
-        The hash in these networks dictates the assigned number of the group we
-        connect to on these links. This enabled us to quickly identify the
+        The hash in these networks was the assigned number (plus 10) of the group we
+        connected to on these links. This enabled us to quickly identify the
         group involved with any connectivity issues using BGP. For example, the
-        link to group 3 used the network \texttt{12.13.0.0/30}.\\
+        link to group 3 used the subnet \texttt{12.13.0.0/30}.\\
         \hline
         \texttt{12.0.0.\#/30} & Internal Point-to-point Link &
-        The hash is a multiple of 4, starting from 0. This choice was
-        arbitrary.\\
+        This hash value was a multiple of 4, starting from 0. Whilst the choice
+        of hash value was effectivly arbitary, the second and third octets had
+        to be 0 to avoid conflicts with our other classifications.\\
         \hline
-        \texttt{12.\#.\#.\#/32} & Loopback Address & The hash is
-        the same value in all three octets of the address and dictates the
+        \texttt{12.\#.\#.\#/32} & Loopback Address & The hash here had
+        the same value in all three octets of the address and dictated the
         router that this loopback was assigned to. For example,
         \texttt{12.3.3.3/32} was the loopback address of Charlie.\\
 
