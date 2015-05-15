@@ -2,13 +2,13 @@
 
 \section{Topology}
 
-The topology used for this lab assignment took the form of a three router set-up, 
+The topology used for this lab assignment took the form of a three router set-up,
 simulating an infrastructure a typical Internet Service Provider (ISP)
 might have. Using three routers as opposed to a one allowed our ISP to make
 use of technologies such as dynamic internal routing and iBGP in order to
 create a fault-tolerant network. Joining our routers in a complete graph
 introduced maximum redundancy and allowed for increased uptime as any traffic
-could of been routed via an alternate path were an outage occur on any single
+could have been routed via an alternate path should an outage occur on any single
 device.
 
 \begin{figure}[!ht]
@@ -50,7 +50,7 @@ Figure~\ref{figure:network-alloc-1}.
         Point-to-point Links & \texttt{/30} & Used for links that connected two
         routers, because those links only required two IP Addresses and a
         \texttt{/30} subnet mask is the smallest mask that can provide this.
-        
+
         \textbf{Note:} The connection to our provider, AS 42, was an exception
         to this and used a \texttt{/24} subnet mask as was provided by AS 42.\\
 
