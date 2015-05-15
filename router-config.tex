@@ -66,10 +66,10 @@ allowed the interface to remain in the IS-IS routing table and prevented route
 updates from being sent or received on that link.
 
 \section{Exterior Gateway Protocols}
-In order for our ISP to provide internet access to our customers we had to have
+In order for our ISP to provide internet access to our customers, we needed to have
 a complete internet routing table from which we could identify the best
-possible routes for our customer's traffic to reach its destination over. In
-addition to having knowledge of an internet routing table, we had to also
+possible routes for our customers' traffic to reach its destination. In
+addition to having knowledge of an internet routing table, we also had to
 provide alternate paths to a destination if a route went offline or links
 became saturated with network traffic. In order to provide both of these
 services we had to use an EGP, of which the only option currently in use is the
@@ -84,22 +84,22 @@ table and the configuration of routing metrics on these prefixes in order to
 influence routing decisions. In comparison, the iBGP process handles the
 propagation of the prefix table throughout internal routers.
 
-For our ISP's peering to other ISPs we opted to take the approach of peering
+For our ISP's peering to other ISPs, we opted to take the approach of peering
 with the source of a loopback interface rather than the traditional method of
 using the source interface of the connection. This decision was taken at an
 early stage of the BGP peering process with the intention of introducing
 redundant connections to peers or implementing multi-hop peering to other
 autonomous systems. However these plans were not implemented due to a lack of
 time and physical interfaces on some routers. Implementation of these
-connections would of required additional configuration on our peer's networks
+connections would have required additional configuration on our peers' networks
 as they would need to have configured a static route on their device in order
 to connect to our loopback and begin the peering process. A snippet of our
 neighbour peering configuration is shown in Listing~\ref{listing:sky-ebgp-conf}.
 It can be seen that in addition to updating the source of the BGP
-process it was also necessary to add the command \texttt{disable-connected-
+process, it was also necessary to add the command \texttt{disable-connected-
 check} which removed a test for BGP peers to ensure that they were directly
-connected. However from our experience in the lab we found that this command
-alone did not allow a peering to form, the additional command \texttt{ebgp-multihop 2}
+connected. However from our experience in the lab, we found that this command
+alone did not allow a peering to form. The additional command \texttt{ebgp-multihop 2}
 was also required in order for the peers to form correctly.
 
 \begin{lstlisting}[caption={BT-Sky eBGP Configuration}, label={listing:sky-ebgp-conf}]
@@ -123,8 +123,8 @@ remain up after IS-IS converges, in comparison using the interface address
 would cause the peering to fail as the IP address would not be reachable after
 a link failure. The command \texttt{next-hop-self} was used to tell the local
 iBGP process to label any routes with their own address as the next hop.
-Without this command the next-hop on any routes would of remained as the next-
-hop for the sending router and this would of caused connectivity issues. A
+Without this command the next-hop on any routes would have remained as the next-
+hop for the sending router and this would have caused connectivity issues. A
 snippet of the iBGP peering configuration between Bravo and Alpha is shown in
 Listing~\ref{listing:bravo-ibgp-conf}
 
@@ -138,13 +138,13 @@ router bgp 2110
 The contents of the prefix table that was distributed by our AS was dependent
 on the configured network statements under the BGP process. This allowed us to
 dictate which of our local networks we wanted our peers to know about and
-therefore allow their traffic to reach. In our configurations we decided that
+therefore allow their traffic to reach. In our configurations, we decided that
 the prefixes we sent should be as specific as possible and should not advertise
 unnecessary sections of our network, such as internal point-to-point links.
 From this decision we were able to narrow the advertised networks down to a
-list of six unique prefixes which were in two groups, the first being the
-Customer Segment networks which housed webservers, DNS and our customers. The
-second grouping was our router subnets, which would facilitate eBGP multihop
+list of six unique prefixes which were in two groups: the
+Customer Segment networks which housed webservers, DNS and our customers and 
+our router subnets, which would facilitate eBGP multihop
 peers as discussed earlier. The configuration for these network advertisements
 is shown in Listing~\ref{listing:bravo-net-conf}.
 
@@ -159,12 +159,12 @@ router bgp 2110
 \end{lstlisting}
 
 \section{Security}
-The first security measure we used was having a user account for every router
+Our first security measure was having a user account for every router
 and laptop in our setup. For ease of use all users were called ``group2''. This
 added the first layer of security, meaning a password was required to access
 the devices.
 
-For routers, a second ``enable'' password was enforced. This prevented users
+For routers, a second ``enable'' password was enforced. This prevented unauthorised users
 from entering enable mode on the routers and was set with the command
 \texttt{enable password \#\#\#\#\#}. The command
 \texttt{service~password-encryption} was then used to encrypt the passwords so
@@ -177,7 +177,7 @@ issues like shoulder-surfing. The alternate option would have been to use
 hash. However seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
 would make much difference.
 
-Additionally telnet was also disabled over router VTY lines. This was done
+Additionally, telnet was also disabled over router VTY lines. This was done
 because telnet sends login information in plaintext, and so is inherently
 insecure. Instead we used SSH with RSA keys to allow secure passwordless
 access. Note that this only made SSH authentication passwordless, both router
@@ -190,12 +190,12 @@ be our provider, whilst DT and Sky were setup as peers to our ISP.
 
 As our provider, AS 42 should have been able to see routes to our network and to
 our peers' networks. In order to do this, our prefix (\texttt {12.0.0.0/8}) and
-our peers' prefixes, Sky and DT (\texttt{8.0.0.0/8} and
-\texttt{34.0.0.0/8} respectively), were advertised to it.
+our peers' prefixes, \texttt{8.0.0.0/8} (Sky) and
+\texttt{34.0.0.0/8} (DT), were advertised to it.
 
 In order to perform this filter, an access list (Listing~\ref{listing:alpha-access})
 was defined on Alpha to match
-all routes that did not belong to the prefix of \texttt{10.0.0.0/8}, i.e.\
+all routes that did not belong to the prefix of \texttt{10.0.0.0/8}, i.e.
 routes not local to AS 42. A route map (Listing~\ref{listing:alpha-route-map}) was then used to tag these routes with
 the well known community tag no-export. This stopped the router from
 advertising routes to anything that was not on our provider's network.
@@ -212,14 +212,14 @@ route-map PEER_NOEXPORT permit 10
 \end{lstlisting}
 
 As Sky and DT were setup to act as peers to our ISP, they should have been able to
-access our network but should not have been able to access each other through us. However
+access our network but should not have been able to access each other through us. However,
 for the sake of providing our peers with redundancy if their link to AS 42 was
 disrupted, we allowed them to access our provider through our network. In order
 for this to work, only the \texttt{10.0.0.0/8} and \texttt{12.0.0.0/8} prefixes
 were advertised to our peers. This allowed the peers to see routes to our
 network and AS 42, but not each other.
 
-Similar access lists to Alpha were defined on Bravo and Charlie in order to
+Access lists similar to Alpha were defined on Bravo and Charlie in order to
 only advertise prefixes to routes local to our peers. Bravo was connected to
 Sky, so routes not on the \texttt{8.0.0.0/8} prefix were tagged with the
 community tag no-export. Charlie was connected to DT, so it tagged routes not
