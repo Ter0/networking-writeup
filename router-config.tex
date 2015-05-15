@@ -239,14 +239,11 @@ ip prefix-list OUT_PEER_ROUTES seq 10 permit 12.0.0.0/8 le 32
 In summary:
 
 \begin{itemize}
-    \item Alpha advertised all prefixes to routes local to our provider
-    (\texttt{10.0.0.0/8})
+    \item Alpha advertised our local prefixes (\texttt{12.0.0.0/8}) and any prefixes belonging to our peers (\texttt{8.0.0.0/8}) and (\texttt{34.0.0.0/8}) to AS 42.
 
-    \item Bravo advertised our prefixes (\texttt{12.0.0.0/8} to \texttt
-    {12.0.0.0/32}) and our provider's prefixes (\texttt{10.0.0.0/8} to
-    \texttt{10.0.0.0/32}) to routes local to Sky (\texttt{8.0.0.0/8})
+    \item Bravo only advertised our prefixes (\texttt{12.0.0.0/8}) and our provider's prefixes (\texttt{10.0.0.0/8}) to Sky.
 
-    \item Charlie advertised our prefixes (\texttt{12.0.0.0/8} to \texttt
-    {12.0.0.0/32}) and our provider's prefixes (\texttt{10.0.0.0/8} to \texttt
-    {10.0.0.0/32}) to routes local to DT (\texttt{34.0.0.0/8})
+    \item Charlie only advertised our prefixes (\texttt{12.0.0.0/8}) and our provider's prefixes (\texttt{10.0.0.0/8}) to DT.
+    
+    \item Any prefixes that did not originate from AS 42, Sky or DT were tagged with no-export and as a result were not externally advertised by any BGP Router.
 \end{itemize}
