@@ -2,7 +2,7 @@
 \section{DNS}
     Bind9 ``is the market share leader for domain name system (DNS) server software,
     with something like 85 per cent of installations worldwide.''.~\cite{Mohan2010}
-    With such a huge level of popularity, it made sense to use Bind9 when configuring
+    With such a high level of popularity, it made sense to use Bind9 when configuring
     our own network. DNS was configured for the entire \texttt{12.0.0.0/24} block and \texttt
     {2020:b012::/32} block using the \texttt{.group2.lboro} domain. The two DNS
     servers: \texttt{ns1.group2.lboro} and \texttt{ns2.group2.lboro} were
@@ -42,7 +42,7 @@
     incoming and outgoing connections, and message storage was handed off to
     dovecot. For security, postfix only supports authentication over TLS. The
     mail server handled mail for the \texttt{group2.lboro} domain, allowing a
-    users email to take the form of \texttt{username@group2.lboro}. Dovecot was
+    user's email to take the form of \texttt{username@group2.lboro}. Dovecot was
     configured to store users mail in the \texttt{/var/mail/vhosts} directory,
     and allow access to the mailboxes using IMAP or POP3. Users and their
     encrypted passwords were specified in the \texttt{/etc/dovecot/dovecot-users}

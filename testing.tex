@@ -1,12 +1,12 @@
 \chapter{Testing}
 \section{Network Infrastructure Testing}
 Testing of the router configurations was performed by viewing the routing
-information of the running network. For the testing of this lab network we
+information of the running network. For the testing of this lab network, we
 opted to test both the routes distributed in normal operation and the fail-over
 behaviour of the network should link failure occur. These tests were
 implemented from both an IGP and EGP perspective.
 
-Testing of the IGP protocol IS-IS was implemented through observing the route
+Testing of the IGP protocol, IS-IS, was implemented through observing the route
 taken by traffic between routers in both normal operation and when the link
 being used was removed. Such a scenario gave an indication as to how resilient
 the interior network was to device failure, as can be seen in
@@ -17,7 +17,7 @@ alternate route. As can be seen in the figure, the time taken for IS-IS
 convergence was enough to drop two ICMP Ping packets. However after these
 timeouts the topology converged and provided a route which is one hop further,
 allowing the final three Ping packets to reach their destination. As can be
-seen from the final traceroute the new route now goes via Alpha to reach
+seen from the final traceroute, the new route now goes via Alpha to reach
 Charlie.
 
 \begin{lstlisting}[caption={Testing of IS-IS reaction to link failure}, label={listing:isis-testing}]
@@ -123,7 +123,7 @@ r>  10.1.1.1/32      10.1.1.1                 0             0 42 i
 \end{lstlisting}
 
 A shortened version on the Bravo BGP Prefix Table is shown in
-Listing~\ref{listing:bravo-bgp-table}, this contains a network
+Listing~\ref{listing:bravo-bgp-table}. This contains a network
 \texttt{56.0.0.0/30} as an example of an external network which has an updated
 next-hop. Bravo would send any traffic directed to the \texttt{56.0.0.0/30}
 network to \texttt{10.1.1.1} which would then forward the traffic to AS 42.
@@ -138,11 +138,11 @@ Network          Next Hop            Metric LocPrf Weight Path
 ...
 \end{lstlisting}
 
-One feature of BT's routing policy was providing a back-up link to each of our
+One feature of our routing policy was providing a back-up link to each of our
 Peer's providers, in both cases this was AS 42 (\texttt{10.0.0.0/8}). To
-provide this redundancy without allowing our network to be exploited we
+provide this redundancy without allowing our network to be exploited, we
 employed policy to restrict the distribution of prefixes between our peers. Our
-configuration restricted advertisements AS 5607 and AS 2792 to only include
+configuration restricted advertisements to AS 5607 and AS 2792 to only include
 (\texttt{12.0.0.0/8}) and (\texttt{10.0.0.0/8}) advertisements.
 Listing~\ref{listing:bravo-advert-table} shows the prefixes that were being
 advertised to AS 5607. Without any policy all known BGP routes would be sent to
@@ -209,7 +209,7 @@ Origin IGP, metric 0, localpref 100, valid, internal, best
 \section{Service Testing}
 The only service that featured redundancy was the DNS servers. Listing~\ref
 {listing:dns-testing} shows the result of the same DNS query made before and
-then after the master DNS server was disconnected. As can be seen, the first
+after the master DNS server was disconnected. As can be seen, the first
 query was answered by the \texttt{12.0.1.2} master server, whereas the second
 query was answered by \texttt{12.0.2.2}, the designated slave server.
 
