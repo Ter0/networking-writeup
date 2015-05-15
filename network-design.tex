@@ -40,24 +40,24 @@ Figure~\ref{figure:network-alloc-1}.
         \textbf{Address Type} & \textbf{Subnet Mask} & \textbf{Justification} \\
 
         \hline
-        Customer Segment & \texttt{/24} & These were allocated to downstream
-        customers, who were given enough address space for 254 devices. In our
-        network, laptops were used on these segments to test connectivity to
-        customers. The size of this subnet also allowed for easy identification
-        of subnets to their location in the topology.\\
+        Customer Segment & \texttt{/24} & Allocated to downstream customers,
+        who were given enough address space for 254 devices. In our network
+        laptops were used to simulate customer devices. The size of this subnet
+        also allowed for easy identification of the subnets' locations in our
+        topology as detailed in Figure~\ref{figure:network-alloc-2}.\\
 
         \hline
-        Point-to-point Links & \texttt{/30} & This was used for links that
-        connected two routers, because for those links only two IP Addresses
-        were required and a \texttt{/30} subnet mask is the smallest mask that
-        can provide this.
+        Point-to-point Links & \texttt{/30} & Used for links that connected two
+        routers, because those links only required two IP Addresses and a
+        \texttt{/30} subnet mask is the smallest mask that can provide this.
+        
         \textbf{Note:} The connection to our provider, AS 42, was an exception
         to this and used a \texttt{/24} subnet mask as was provided by AS 42.\\
 
         \hline
-        Loopback Address & \texttt{/32} & These were addresses used for the
-        loopback interfaces on the routers. There was only a requirement for a
-        single address and a \texttt{/32} mask produced this.\\
+        Loopback Address & \texttt{/32} & Used for the loopback interfaces on
+        our routers. Only a single address was required and a \texttt{/32} mask
+        produces this.\\
 
         \hline
     \end{tabular}
