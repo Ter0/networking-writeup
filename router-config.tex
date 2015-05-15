@@ -1,7 +1,7 @@
 \chapter{Router Configuration}
 \section{Static Routing}
 Static routing is a method of explicitly stating where a router should send its
-traffic for a given network. Due to it's administrative distance of 1, a static
+traffic for a given network. Due to its administrative distance of 1, a static
 route is chosen over any other routing protocol, only being overruled if the
 router can see that the destination address is on a local interface (directly
 connected). Once our network began to adopt IS-IS as its interior gateway
@@ -23,19 +23,19 @@ route was used as a component of the eBGP peer link to Autonomous System No.
     communicate and thus would never have peered with one another.
 
 \section{Interior Gateway Protocols (IGP)}
-Within the three-router layout it can be seen that all networks in the topology
+Within the three-router layout, it can be seen that all networks in the topology
 have at least two paths to connect them to any other network. Because of this
 it was decided that the use of static routing would not provide the fault
 tolerance that would be expected of an ISP network. Instead we opted to use an
 IGP to provide automatic routing within our infrastructure. This was done using
 Intermediate System - Intermediate System (IS-IS), a link state protocol which
 computes the shortest path between devices in the network using Dijkstra's
-Shortest Path Algorithm. We opted to use dynamic routings in our internal
+Shortest Path Algorithm. We opted to use dynamic routing in our internal
 infrastructure due to their reliability and fast convergence time when any
 issues arise within their networks.
 
 IS-IS was implemented using the loopback interfaces defined on each router in
-the network. From the IP address of these loopbacks we have defined a NET
+the network. From the IP address of these loopbacks, we have defined a NET
 address which represents the device in the IS-IS routing process. The NET is in
 NSAP format which defines information about the device such as its Area ID and
 a unique ID to identify it within that area. An example NET address for Alpha
@@ -51,17 +51,17 @@ router isis
  passive-interface FastEthernet0/0/1
 \end{lstlisting}
 
-For IS-IS to include networks in its routing table each network also needs to be
+For IS-IS to include networks in its routing table, each network also needs to be
 added on an interface-by-interface basis, flagging the interface to be included
 in the routing table. This was implemented on all interfaces inside of our ISP
 for both IPv4 and IPv6. Once both the routing process and the interfaces for
-routing have been defined on all devices the IS-IS process runs the shortest
+routing have been defined on all devices, the IS-IS process runs the shortest
 path algorithm and selects the best routes within its network. When connecting
-to other Autonomous Systems for BGP it soon became apparent that other groups
-had opted for a similar NET address schema to ourselves, this caused additional
+to other Autonomous Systems for BGP, it soon became apparent that other groups
+had opted for a similar NET address schema to ourselves. This caused additional
 problems as routes from another ISP's IS-IS process were being passed into our
 infrastructure. In order to stop these routes from coming into the internal
-routing process passive interfaces were configured on all external links. This
+routing process, passive interfaces were configured on all external links. This
 allowed the interface to remain in the IS-IS routing table and prevented route
 updates from being sent or received on that link.
 
