@@ -20,13 +20,13 @@ route was used as a component of the eBGP peer link to Autonomous System No.
     because of this the local side required a static route which provided
     initial connectivity to the Loopback. Without the use of these static
     routes the BGP sources on both sides would not have been able to
-    communicate and thus would never of peered with one-another.
+    communicate and thus would never have peered with one-another.
 
 \section{Interior Gateway Protocols}
 Within the three-router layout it can be seen that all networks within the
 topology have at least two paths to connect to any other network. Because of
-this it was decided that the use of static routing would not provide the fault-
-tolerance that would be expected in an ISP network. To provide this additional
+this it was decided that the use of static routing would not provide the
+fault-tolerance that would be expected in an ISP network. To provide this additional
 level of redundancy we opted to use an IGP to provide automatic routing within
 the BT infrastructure. This was done using Intermediate System - Intermediate
 System (IS-IS), a link state protocol which computes the shortest path between
@@ -72,7 +72,7 @@ routes for their customer's traffic to reach its destination over. In addition
 to having knowledge of an internet routing table, BT must also provide
 alternate paths to a destination should a route go offline or their links
 become saturated with network traffic. In order to provide both of these
-services an EGP must be used, the only EGP currently in use is the Border
+services an EGP must be used, of which the only option currently in use is the Border
 Gateway Protocol (BGP). This external routing protocol allows Autonomous
 Systems to interact with one-another through the exchange of prefixes (network
 advertisements) or through traffic management in the form of BGP policy.
@@ -171,7 +171,7 @@ was then used to encrypt the passwords so they did not appear in
 the router configuration files as plaintext. It should be noted that
 \texttt{service password-encryption} uses a weak form of
 encryption~\cite{ciscocracker}, and so is best used as a deterrent for issues
-like shoulder-surfing. The alternate option would of been to use
+like shoulder-surfing. The alternate option would have been to use
 \texttt{enable secret \#\#\#\#\#} instead which stores the password as an MD5
 hash. However seeing as MD5 is fairly weak anyway~\cite{md5} we didn't feel it
 would make much difference.
@@ -187,19 +187,19 @@ In order to simulate a real world situation, traffic entering and leaving our
 network needed to be managed. To demonstrate this, AS 42 was setup to
 be our provider, whilst DT and Sky were setup as peers to our ISP.
 
-As our provider AS 42 should of been able to see routes to our network and to
+As our provider, AS 42 should have been able to see routes to our network and to
 our peers' networks. In order to do this, our prefix (\texttt {12.0.0.0/8}) and
 our peers' prefixes, Sky and DT (\texttt{8.0.0.0/8} and
 \texttt{34.0.0.0/8} respectively), were advertised to it.
 
 In order to perform this filter, an access list was defined on Alpha to match
-all routes that did not belong to the prefix of \texttt{10.0.0.0/8}, i.e.
+all routes that did not belong to the prefix of \texttt{10.0.0.0/8}, i.e.\
 routes not local to AS 42. A route map was then used to tag these routes with
 the well known community tag no-export. This stopped the router from
 advertising routes to anything that was not on our provider's network.
 
-As Sky and DT were setup to be peer to our ISP, they should of been able to
-access our network but not been able to access each other through us. However
+As Sky and DT were setup to act as peers to our ISP, they should have been able to
+access our network but should not have been able to access each other through us. However
 for the sake of providing our peers with redundancy if their link to AS 42 was
 disrupted, we allowed them to access our provider through our network. In order
 for this to work, only the \texttt{10.0.0.0/8} and \texttt{12.0.0.0/8} prefixes
