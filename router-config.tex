@@ -192,11 +192,23 @@ our peers' networks. In order to do this, our prefix (\texttt {12.0.0.0/8}) and
 our peers' prefixes, Sky and DT (\texttt{8.0.0.0/8} and
 \texttt{34.0.0.0/8} respectively), were advertised to it.
 
-In order to perform this filter, an access list was defined on Alpha to match
+In order to perform this filter, an access list (Listing~\ref{listing:alpha-access})
+was defined on Alpha to match
 all routes that did not belong to the prefix of \texttt{10.0.0.0/8}, i.e.\
-routes not local to AS 42. A route map was then used to tag these routes with
+routes not local to AS 42. A route map (Listing~\ref{listing:alpha-route-map}) was then used to tag these routes with
 the well known community tag no-export. This stopped the router from
 advertising routes to anything that was not on our provider's network.
+
+\begin{lstlisting}[caption={Alpha Access List}, label={listing:alpha-access}]
+ip access-list standard MATCH_NONPEER
+ deny   10.0.0.0 0.255.255.255
+ permit any
+\end{lstlisting}
+\begin{lstlisting}[caption={Alpha Route Map}, label={listing:alpha-route-map}]
+route-map PEER_NOEXPORT permit 10
+ match ip address MATCH_NONPEER
+ set community no-export
+\end{lstlisting}
 
 As Sky and DT were setup to act as peers to our ISP, they should have been able to
 access our network but should not have been able to access each other through us. However
@@ -212,11 +224,16 @@ Sky, so routes not on the \texttt{8.0.0.0/8} prefix were tagged with the
 community tag no-export. Charlie was connected to DT, so it tagged routes not
 on the \texttt{34.0.0.0/8} prefix with the community tag no-export. As our
 peers were not allowed to communicate with each other through us, we also had
-to define prefix lists on Bravo and Charlie. As they were both allowed to
+to define prefix lists (Listing~\ref{listing:bravo-charlie-prefix-list}) on Bravo and Charlie. As they were both allowed to
 access our network and our provider, prefix lists were created to permit the
 \texttt{10.0.0.0/8} to \texttt{10.0.0.0/32} prefixes and the
 \texttt{12.0.0.0/8} to \texttt{12.0.0.0/32} prefixes. This set the routers to
 only advertise our network and our provider's network to our peers.
+
+\begin{lstlisting}[caption={Bravo and Charlie Prefix List}, label={listing:bravo-charlie-prefix-list}]
+ip prefix-list OUT_PEER_ROUTES seq 5 permit 10.0.0.0/8 le 32
+ip prefix-list OUT_PEER_ROUTES seq 10 permit 12.0.0.0/8 le 32
+\end{lstlisting}
 
 In summary:
 
