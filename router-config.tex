@@ -1,46 +1,46 @@
 \chapter{Router Configuration}
-\section{Static Routing} Static routing is a
-method of explicitly stating where a router should send its traffic for a given
-network. Due to it's Administrative Distance of 1, a static route is chosen
-over any other routing protocol, only being overruled if the router can see
-that the destination address is on a local interface (directly connected). Once
-the BT network began to adopt IS-IS as its interior gateway protocol (IGP)
-static routes were removed in favour of dynamic routing. They were also removed
-from the configurations to ensure that static routes were not erroneously
-chosen over a IS-IS sourced counterpart.
+\section{Static Routing}
+Static routing is a method of explicitly stating where a router should send its
+traffic for a given network. Due to it's administrative distance of 1, a static
+route is chosen over any other routing protocol, only being overruled if the
+router can see that the destination address is on a local interface (directly
+connected). Once our network began to adopt IS-IS as its interior gateway
+protocol (IGP) static routes were removed in favor of dynamic routing. They
+were also removed from the configurations to ensure that static routes were not
+erroneously chosen over an IS-IS sourced counterpart.
 
 \begin{lstlisting}[caption={Alpha Static Route}, label={listing:alpha-static}]
 ip route 10.1.1.1 255.255.255.255 100.100.105.1
 \end{lstlisting}
 
-In the final topology of BT a single static route remained in use, the
+In the final topology of our network a single static route remained in use, the
 configuration of which is shown in Listing~\ref{listing:alpha-static}. This
 route was used as a component of the eBGP peer link to Autonomous System No.
-42. The peering was sourced from a Loopback interface on the remote side and
+42. The peering was sourced from a loopback interface on the remote side and
     because of this the local side required a static route which provided
-    initial connectivity to the Loopback. Without the use of these static
+    initial connectivity to the loopback. Without the use of these static
     routes the BGP sources on both sides would not have been able to
-    communicate and thus would never have peered with one-another.
+    communicate and thus would never have peered with one another.
 
-\section{Interior Gateway Protocols}
-Within the three-router layout it can be seen that all networks within the
-topology have at least two paths to connect to any other network. Because of
-this it was decided that the use of static routing would not provide the
-fault-tolerance that would be expected in an ISP network. To provide this additional
-level of redundancy we opted to use an IGP to provide automatic routing within
-the BT infrastructure. This was done using Intermediate System - Intermediate
-System (IS-IS), a link state protocol which computes the shortest path between
-devices in the network using Dijkstra's Shortest Path Algorithm. We opted to
-use dynamic routings in BT's internal infrastructure due to their reliability
-and fast convergence time when any issues arise within the network.
+\section{Interior Gateway Protocols (IGP)}
+Within the three-router layout it can be seen that all networks in the topology
+have at least two paths to connect them to any other network. Because of this
+it was decided that the use of static routing would not provide the fault
+tolerance that would be expected of an ISP network. Instead we opted to use an
+IGP to provide automatic routing within our infrastructure. This was done using
+Intermediate System - Intermediate System (IS-IS), a link state protocol which
+computes the shortest path between devices in the network using Dijkstra's
+Shortest Path Algorithm. We opted to use dynamic routings in our internal
+infrastructure due to their reliability and fast convergence time when any
+issues arise within their networks.
 
-IS-IS was implemented using the Loopback interfaces defined on each router in
-the network. From the IP Address of these Loopbacks we have defined a NET
+IS-IS was implemented using the loopback interfaces defined on each router in
+the network. From the IP address of these loopbacks we have defined a NET
 address which represents the device in the IS-IS routing process. The NET is in
 NSAP format which defines information about the device such as its Area ID and
-a unique ID to identify it within that area. An example NET address for
-Alpha is shown in Listing~\ref{listing:alpha-isis}, from this we can see that
-Alpha was a member of Area 1 and had an IP address of \texttt{12.1.1.1}.
+a unique ID to identify it within that area. An example NET address for Alpha
+is shown in Listing~\ref{listing:alpha-isis}. From this we can see that Alpha
+was a member of Area 1 and had an IP address of \texttt{12.1.1.1}.
 
 \begin{lstlisting}[caption={Alpha IS-IS Configuration}, label={listing:alpha-isis}]
 hostname Alpha
@@ -53,17 +53,17 @@ router isis
 
 For IS-IS to include networks in its routing table the network also needs to be
 added on an interface-by-interface basis, flagging the interface to be included
-in the routing table. This was implemented on all interfaces inside of BT for
-both IPv4 and IPv6. Once both the routing process and the interfaces for
-routing has been defined on all devices the IS-IS process runs the shortest
-path algorithm and selects the best routes within the network. When connecting
-BT to other Autonomous Systems for BGP it soon became apparent that other
-groups had opted for a similar NET address schema as ourselves, this caused
-additional problems as routes from another ISP's IS-IS process were being
-passed into the BT infrastructure. In order to stop these routes from coming
-into the internal routing process passive interfaces were configured on all
-external links. This allowed the interface to remain in the IS-IS routing table
-and prevented route updates from being sent or received on that link.
+in the routing table. This was implemented on all interfaces inside of our ISP
+for both IPv4 and IPv6. Once both the routing process and the interfaces for
+routing have been defined on all devices the IS-IS process runs the shortest
+path algorithm and selects the best routes within its network. When connecting
+to other Autonomous Systems for BGP it soon became apparent that other groups
+had opted for a similar NET address schema to ourselves, this caused additional
+problems as routes from another ISP's IS-IS process were being passed into our
+infrastructure. In order to stop these routes from coming into the internal
+routing process passive interfaces were configured on all external links. This
+allowed the interface to remain in the IS-IS routing table and prevented route
+updates from being sent or received on that link.
 
 \section{Exterior Gateway Protocols}
 In order for BT to provide internet access to their customers they must have a
